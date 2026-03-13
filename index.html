@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>အအေးစာရင်း</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./icon.svg">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="အအေးစာရင်း">
+<meta name="theme-color" content="#00d4aa">
+<style>
+  :root {
+    --bg: #0a0f1a;
+    --surface: #111827;
+    --card: #1a2236;
+    --border: #2a3650;
+    --accent: #00d4aa;
+    --accent2: #ff6b35;
+    --text: #e8f0fe;
+    --muted: #6b7fa3;
+    --success: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+background: var(–bg);
+color: var(–text);
+font-family: ‘Noto Sans Myanmar’, sans-serif;
+min-height: 100vh;
+padding-bottom: 40px;
+}
+
+header {
+background: linear-gradient(135deg, #0a0f1a 0%, #111827 100%);
+border-bottom: 1px solid var(–border);
+padding: 16px 20px;
+position: sticky;
+top: 0;
+z-index: 100;
+display: flex;
+align-items: center;
+gap: 12px;
+}
+
+.logo {
+font-size: 1.5rem;
+font-weight: 700;
+color: var(–accent);
+letter-spacing: -0.5px;
+}
+
+.date-badge {
+margin-left: auto;
+font-family: ‘IBM Plex Mono’, monospace;
+font-size: 0.75rem;
+color: var(–muted);
+background: var(–surface);
+padding: 4px 10px;
+border-radius: 20px;
+border: 1px solid var(–border);
+}
+
+.container { max-width: 480px; margin: 0 auto; padding: 0 16px; }
+
+/* Tabs */
+.tabs {
+display: flex;
+gap: 4px;
+margin: 16px 0;
+background: var(–surface);
+padding: 4px;
+border-radius: 12px;
+border: 1px solid var(–border);
+}
+
+.tab {
+flex: 1;
+padding: 10px 8px;
+border: none;
+border-radius: 8px;
+background: transparent;
+color: var(–muted);
+font-family: ‘Noto Sans Myanmar’, sans-serif;
+font-size: 0.82rem;
+cursor: pointer;
+transition: all 0.2s;
+font-weight: 500;
+}
+
+.tab.active {
+background: var(–accent);
+color: #0a0f1a;
+font-weight: 700;
+}
+
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* Cards */
+.card {
+background: var(–card);
+border: 1px solid var(–border);
+border-radius: 16px;
+padding: 16px;
+margin-bottom: 12px;
+}
+
+.card-title {
+font-size: 0.78rem;
+color: var(–muted);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+margin-bottom: 12px;
+display: flex;
+align-items: center;
+gap: 6px;
+}
+
+/* Form elements */
+.form-row {
+display: flex;
+gap: 8px;
+margin-bottom: 10px;
+align-items: center;
+}
+
+.input-group {
+display: flex;
+flex-direction: column;
+gap: 4px;
+flex: 1;
+}
+
+label {
+font-size: 0.72rem;
+color: var(–muted);
+}
+
+input, select {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 8px;
+color: var(–text);
+font-family: ‘Noto Sans Myanmar’, sans-serif;
+font-size: 0.9rem;
+padding: 10px 12px;
+outline: none;
+width: 100%;
+transition: border-color 0.2s;
+}
+
+input:focus, select:focus {
+border-color: var(–accent);
+}
+
+input[type=“number”] {
+font-family: ‘IBM Plex Mono’, monospace;
+}
+
+.btn {
+padding: 10px 16px;
+border: none;
+border-radius: 8px;
+font-family: ‘Noto Sans Myanmar’, sans-serif;
+font-size: 0.85rem;
+cursor: pointer;
+font-weight: 600;
+transition: all 0.15s;
+white-space: nowrap;
+}
+
+.btn-primary {
+background: var(–accent);
+color: #0a0f1a;
+}
+
+.btn-primary:hover { filter: brightness(1.1); }
+
+.btn-danger {
+background: var(–danger);
+color: white;
+padding: 6px 10px;
+font-size: 0.75rem;
+}
+
+.btn-warn {
+background: var(–warning);
+color: #0a0f1a;
+}
+
+.btn-secondary {
+background: var(–surface);
+color: var(–text);
+border: 1px solid var(–border);
+}
+
+.btn-full { width: 100%; margin-top: 8px; padding: 12px; }
+
+/* Voice button */
+.voice-btn {
+width: 64px;
+height: 64px;
+border-radius: 50%;
+background: var(–accent2);
+border: none;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1.6rem;
+margin: 0 auto 12px;
+transition: all 0.2s;
+box-shadow: 0 0 0 0 rgba(255,107,53,0.4);
+}
+
+.voice-btn.listening {
+animation: pulse 1.2s infinite;
+background: var(–danger);
+}
+
+@keyframes pulse {
+0% { box-shadow: 0 0 0 0 rgba(239,68,68,0.5); }
+70% { box-shadow: 0 0 0 18px rgba(239,68,68,0); }
+100% { box-shadow: 0 0 0 0 rgba(239,68,68,0); }
+}
+
+.voice-transcript {
+background: var(–surface);
+border: 1px dashed var(–border);
+border-radius: 10px;
+padding: 12px;
+font-size: 0.85rem;
+min-height: 52px;
+color: var(–muted);
+margin-bottom: 10px;
+font-style: italic;
+line-height: 1.6;
+}
+
+.voice-transcript.has-text { color: var(–text); font-style: normal; }
+
+/* Items list */
+.item-row {
+display: flex;
+align-items: center;
+gap: 8px;
+padding: 10px 12px;
+background: var(–surface);
+border-radius: 10px;
+margin-bottom: 6px;
+border: 1px solid var(–border);
+}
+
+.item-name {
+flex: 1;
+font-size: 0.9rem;
+font-weight: 500;
+}
+
+.item-stock {
+font-family: ‘IBM Plex Mono’, monospace;
+font-size: 0.82rem;
+color: var(–accent);
+min-width: 60px;
+text-align: right;
+}
+
+.item-price {
+font-family: ‘IBM Plex Mono’, monospace;
+font-size: 0.78rem;
+color: var(–muted);
+min-width: 70px;
+text-align: right;
+}
+
+.stock-low { color: var(–danger) !important; }
+.stock-mid { color: var(–warning) !important; }
+
+/* Sales log */
+.sale-row {
+display: flex;
+align-items: center;
+gap: 8px;
+padding: 8px 12px;
+background: var(–surface);
+border-radius: 8px;
+margin-bottom: 5px;
+border-left: 3px solid var(–accent);
+font-size: 0.85rem;
+}
+
+.sale-time {
+font-family: ‘IBM Plex Mono’, monospace;
+font-size: 0.72rem;
+color: var(–muted);
+min-width: 48px;
+}
+
+.sale-detail { flex: 1; }
+.sale-total {
+font-family: ‘IBM Plex Mono’, monospace;
+font-size: 0.85rem;
+color: var(–success);
+font-weight: 600;
+}
+
+/* Summary stats */
+.stats-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 10px;
+margin-bottom: 14px;
+}
+
+.stat-box {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 12px;
+padding: 14px;
+text-align: center;
+}
+
+.stat-value {
+font-family: ‘IBM Plex Mono’, monospace;
+font-size: 1.3rem;
+font-weight: 600;
+color: var(–accent);
+margin-bottom: 4px;
+}
+
+.stat-label {
+font-size: 0.72rem;
+color: var(–muted);
+}
+
+.empty-state {
+text-align: center;
+padding: 30px;
+color: var(–muted);
+font-size: 0.85rem;
+}
+
+/* Quick sell */
+.quick-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 8px;
+margin-bottom: 12px;
+}
+
+.quick-btn {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 10px;
+padding: 12px 8px;
+color: var(–text);
+font-family: ‘Noto Sans Myanmar’, sans-serif;
+font-size: 0.8rem;
+cursor: pointer;
+text-align: center;
+transition: all 0.15s;
+line-height: 1.5;
+}
+
+.quick-btn:hover {
+border-color: var(–accent);
+background: rgba(0,212,170,0.08);
+}
+
+.quick-btn .q-name { font-weight: 600; display: block; }
+.quick-btn .q-price { color: var(–accent); font-family: ‘IBM Plex Mono’, monospace; font-size: 0.78rem; }
+.quick-btn .q-stock { color: var(–muted); font-size: 0.72rem; }
+
+.notification {
+position: fixed;
+bottom: 20px;
+left: 50%;
+transform: translateX(-50%);
+background: var(–accent);
+color: #0a0f1a;
+padding: 10px 20px;
+border-radius: 30px;
+font-weight: 600;
+font-size: 0.85rem;
+opacity: 0;
+transition: opacity 0.3s;
+z-index: 999;
+pointer-events: none;
+white-space: nowrap;
+}
+
+.notification.show { opacity: 1; }
+
+.section-sep {
+height: 1px;
+background: var(–border);
+margin: 14px 0;
+}
+
+.voice-hint {
+font-size: 0.72rem;
+color: var(–muted);
+text-align: center;
+margin-bottom: 8px;
+}
+
+.parsed-preview {
+background: rgba(0,212,170,0.08);
+border: 1px solid rgba(0,212,170,0.3);
+border-radius: 8px;
+padding: 10px 12px;
+font-size: 0.82rem;
+margin-bottom: 8px;
+display: none;
+}
+
+.parsed-preview.show { display: block; }
+.parsed-item { display: flex; justify-content: space-between; margin-bottom: 4px; }
+.parsed-label { color: var(–muted); }
+.parsed-val { color: var(–accent); font-family: ‘IBM Plex Mono’, monospace; font-weight: 600; }
+
+.chip {
+display: inline-block;
+padding: 2px 8px;
+border-radius: 20px;
+font-size: 0.7rem;
+font-weight: 600;
+margin-left: 6px;
+}
+
+.chip-ok { background: rgba(16,185,129,0.15); color: var(–success); }
+.chip-low { background: rgba(239,68,68,0.15); color: var(–danger); }
+</style>
+
+</head>
+<body>
+
+<header>
+  <div class="logo">🧊 အအေးစာရင်း</div>
+  <div class="date-badge" id="headerDate"></div>
+</header>
+
+<div class="container">
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('stock')">📦 ပစ္စည်း</button>
+    <button class="tab" onclick="switchTab('sell')">💰 ရောင်းချ</button>
+    <button class="tab" onclick="switchTab('voice')">🎤 အသံ</button>
+    <button class="tab" onclick="switchTab('summary')">📊 ချုပ်</button>
+  </div>
+
+  <!-- STOCK TAB -->
+
+  <div class="panel active" id="panel-stock">
+    <div class="card">
+      <div class="card-title">➕ ပစ္စည်းသစ်ထည့်ရန်</div>
+      <div class="form-row">
+        <div class="input-group">
+          <label>အမည်</label>
+          <input type="text" id="newItemName" placeholder="ဥပမာ - Coke 325ml">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="input-group">
+          <label>ဝယ်ဈေး (ဘတ်)</label>
+          <input type="number" id="newItemCost" placeholder="12">
+        </div>
+        <div class="input-group">
+          <label>ရောင်းဈေး (ဘတ်)</label>
+          <input type="number" id="newItemPrice" placeholder="15">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="input-group">
+          <label>အဝင်ပမာဏ</label>
+          <input type="number" id="newItemQty" placeholder="24">
+        </div>
+        <div class="input-group">
+          <label>သတိပေးပမာဏ</label>
+          <input type="number" id="newItemAlert" placeholder="5">
+        </div>
+      </div>
+      <button class="btn btn-primary btn-full" onclick="addItem()">ထည့်မည်</button>
+    </div>
+
+```
+<div class="card">
+  <div class="card-title">📋 ပစ္စည်းစာရင်း</div>
+  <div id="itemList"><div class="empty-state">ပစ္စည်းများ မထည့်ရသေးပါ</div></div>
+</div>
+
+<div class="card">
+  <div class="card-title">🔄 Stock ဖြည့်ရန် (Restock)</div>
+  <div class="form-row">
+    <div class="input-group">
+      <label>ပစ္စည်းရွေးချယ်</label>
+      <select id="restockItem"></select>
+    </div>
+    <div class="input-group">
+      <label>ဖြည့်ပမာဏ</label>
+      <input type="number" id="restockQty" placeholder="24">
+    </div>
+  </div>
+  <button class="btn btn-warn btn-full" onclick="restock()">Stock ဖြည့်မည်</button>
+</div>
+```
+
+  </div>
+
+  <!-- SELL TAB -->
+
+  <div class="panel" id="panel-sell">
+    <div class="card">
+      <div class="card-title">⚡ အမြန်ရောင်းရန်</div>
+      <div class="quick-grid" id="quickSellGrid"></div>
+    </div>
+
+```
+<div class="card">
+  <div class="card-title">✏️ ကိုယ်တိုင်ထည့်ရန်</div>
+  <div class="form-row">
+    <div class="input-group">
+      <label>ပစ္စည်းရွေး</label>
+      <select id="sellItem"></select>
+    </div>
+    <div class="input-group">
+      <label>အရေအတွက်</label>
+      <input type="number" id="sellQty" value="1" min="1">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="input-group">
+      <label>ရောင်းဈေး (ပြင်နိုင်)</label>
+      <input type="number" id="sellPrice" placeholder="auto">
+    </div>
+  </div>
+  <button class="btn btn-primary btn-full" onclick="sellItem()">ရောင်းမည်</button>
+</div>
+
+<div class="card">
+  <div class="card-title">🧾 ယနေ့ ရောင်းချမှတ်တမ်း</div>
+  <div id="salesLog"><div class="empty-state">မရောင်းရသေးပါ</div></div>
+</div>
+```
+
+  </div>
+
+  <!-- VOICE TAB -->
+
+  <div class="panel" id="panel-voice">
+    <div class="card">
+      <div class="card-title">🎤 အသံဖြင့် မှတ်တမ်းတင်</div>
+      <div class="voice-hint">မိုက်ခ်ကိုနှိပ်ပြီး ပြောပါ<br><small style="opacity:0.6">ဥပမာ - "Coke တစ်ဘူး ပင်တုန်းဆယ့်ငါးဘတ်"</small></div>
+      <button class="voice-btn" id="voiceBtn" onclick="toggleVoice()">🎤</button>
+      <div id="voiceStatus" style="text-align:center; font-size:0.78rem; color:var(--muted); margin-bottom:10px;">နှိပ်ပါ</div>
+      <div class="voice-transcript" id="voiceTranscript">ဘာများပြောသနည်း...</div>
+
+```
+  <div class="parsed-preview" id="parsedPreview">
+    <div class="parsed-item"><span class="parsed-label">ပစ္စည်း</span><span class="parsed-val" id="pvItem">-</span></div>
+    <div class="parsed-item"><span class="parsed-label">အရေအတွက်</span><span class="parsed-val" id="pvQty">-</span></div>
+    <div class="parsed-item"><span class="parsed-label">ဈေး</span><span class="parsed-val" id="pvPrice">-</span></div>
+  </div>
+
+  <button class="btn btn-primary btn-full" id="confirmVoiceBtn" onclick="confirmVoiceSale()" style="display:none">✅ ဒါမှန်တယ်၊ မှတ်မည်</button>
+  <button class="btn btn-secondary btn-full" onclick="clearVoice()" style="margin-top:6px">ဖျက်မည်</button>
+</div>
+
+<div class="card">
+  <div class="card-title">📖 ပြောနည်းဥပမာများ</div>
+  <div style="font-size:0.82rem; line-height:2; color:var(--muted);">
+    <div>💬 <span style="color:var(--text)">"Coke ၂ ဘူး ၃၀ ဘတ်"</span></div>
+    <div>💬 <span style="color:var(--text)">"ရေတစ်ဘူး ၁၅ ဘတ်"</span></div>
+    <div>💬 <span style="color:var(--text)">"Pepsi ၃ ဘူး ၄၅ ဘတ်"</span></div>
+    <div>💬 <span style="color:var(--text)">"orange ၁ can ၂၀ ဘတ်"</span></div>
+  </div>
+</div>
+```
+
+  </div>
+
+  <!-- SUMMARY TAB -->
+
+  <div class="panel" id="panel-summary">
+    <div class="card">
+      <div class="card-title">📊 ယနေ့ ချုပ်စာရင်း</div>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-value" id="statRevenue">0</div>
+          <div class="stat-label">ရောင်းရငွေ (ဘတ်)</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="statProfit" style="color:var(--success)">0</div>
+          <div class="stat-label">အမြတ် (ဘတ်)</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="statTxCount">0</div>
+          <div class="stat-label">ရောင်းချအကြိမ်</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="statUnits">0</div>
+          <div class="stat-label">ရောင်းထွက်ပမာဏ</div>
+        </div>
+      </div>
+    </div>
+
+```
+<div class="card">
+  <div class="card-title">📦 လက်ကျန် Stock</div>
+  <div id="stockSummary"><div class="empty-state">ပစ္စည်းများ မထည့်ရသေးပါ</div></div>
+</div>
+
+<div class="card">
+  <div class="card-title">📈 ပစ္စည်းအလိုက် ရောင်းချမှတ်တမ်း</div>
+  <div id="itemSummary"><div class="empty-state">မရောင်းရသေးပါ</div></div>
+</div>
+
+<div class="section-sep"></div>
+<button class="btn btn-danger btn-full" onclick="resetDaySales()">🔄 နေ့ချုပ်ပြီး ရောင်းချမှတ်တမ်း သန့်ရှင်းမည်</button>
+```
+
+  </div>
+</div>
+
+<div class="notification" id="notification"></div>
+
+<!-- PWA Install Banner -->
+
+<div id="installBanner" style="display:none; position:fixed; bottom:0; left:0; right:0; background:linear-gradient(135deg,#1a2236,#111827); border-top:1px solid #00d4aa; padding:14px 16px; align-items:center; gap:12px; z-index:9999; max-width:480px; margin:0 auto;">
+  <div style="font-size:1.6rem">🧊</div>
+  <div style="flex:1">
+    <div style="font-family:'Noto Sans Myanmar',sans-serif; font-size:0.85rem; font-weight:700; color:#e8f0fe;">App အဖြစ်တပ်ဆင်ရန်</div>
+    <div style="font-family:'Noto Sans Myanmar',sans-serif; font-size:0.72rem; color:#6b7fa3; margin-top:2px;">Homescreen မှ တိုက်ရိုက်ဖွင့်နိုင်မည်</div>
+  </div>
+  <button onclick="installApp()" style="background:#00d4aa; color:#0a0f1a; border:none; border-radius:8px; padding:9px 16px; font-family:'Noto Sans Myanmar',sans-serif; font-size:0.82rem; font-weight:700; cursor:pointer;">တပ်ဆင်မည်</button>
+  <button onclick="dismissInstall()" style="background:transparent; color:#6b7fa3; border:none; font-size:1.2rem; cursor:pointer; padding:4px;">✕</button>
+</div>
+
+<script>
+// ==================== DATA ====================
+let items = JSON.parse(localStorage.getItem('items') || '[]');
+let sales = JSON.parse(localStorage.getItem('sales') || '[]');
+let voiceParsed = null;
+let recognition = null;
+let isListening = false;
+
+// ==================== INIT ====================
+function init() {
+  updateDate();
+  renderAll();
+}
+
+function updateDate() {
+  const now = new Date();
+  const days = ['တနင်္ဂနွေ','တနင်္လာ','အင်္ဂါ','ဗုဒ္ဓဟူး','ကြာသပတေး','သောကြာ','စနေ'];
+  document.getElementById('headerDate').textContent =
+    days[now.getDay()] + ' ' + now.getDate() + '/' + (now.getMonth()+1);
+}
+
+function save() {
+  localStorage.setItem('items', JSON.stringify(items));
+  localStorage.setItem('sales', JSON.stringify(sales));
+}
+
+// ==================== ITEMS ====================
+function addItem() {
+  const name = document.getElementById('newItemName').value.trim();
+  const cost = parseFloat(document.getElementById('newItemCost').value) || 0;
+  const price = parseFloat(document.getElementById('newItemPrice').value) || 0;
+  const qty = parseInt(document.getElementById('newItemQty').value) || 0;
+  const alert = parseInt(document.getElementById('newItemAlert').value) || 5;
+
+  if (!name) { notify('အမည်ထည့်ပါ'); return; }
+  if (items.find(i => i.name.toLowerCase() === name.toLowerCase())) {
+    notify('ထိုပစ္စည်းရှိပြီးသား'); return;
+  }
+
+  items.push({ id: Date.now(), name, cost, price, qty, alert });
+  save();
+  renderAll();
+  // clear
+  document.getElementById('newItemName').value = '';
+  document.getElementById('newItemCost').value = '';
+  document.getElementById('newItemPrice').value = '';
+  document.getElementById('newItemQty').value = '';
+  notify(name + ' ထည့်ပြီး ✓');
+}
+
+function deleteItem(id) {
+  if (!confirm('ဖျက်မှာသေချာလား?')) return;
+  items = items.filter(i => i.id !== id);
+  save(); renderAll();
+}
+
+function restock() {
+  const sel = document.getElementById('restockItem');
+  const qty = parseInt(document.getElementById('restockQty').value) || 0;
+  if (!sel.value || qty <= 0) { notify('ပမာဏထည့်ပါ'); return; }
+  const item = items.find(i => i.id == sel.value);
+  if (!item) return;
+  item.qty += qty;
+  save(); renderAll();
+  document.getElementById('restockQty').value = '';
+  notify(item.name + ' ' + qty + ' ခု ဖြည့်ပြီး ✓');
+}
+
+// ==================== SELL ====================
+function sellItem() {
+  const sel = document.getElementById('sellItem');
+  const qty = parseInt(document.getElementById('sellQty').value) || 1;
+  const customPrice = parseFloat(document.getElementById('sellPrice').value);
+  if (!sel.value) { notify('ပစ္စည်းရွေးပါ'); return; }
+  const item = items.find(i => i.id == sel.value);
+  if (!item) return;
+  doSell(item, qty, customPrice || item.price);
+}
+
+function quickSell(id) {
+  const item = items.find(i => i.id === id);
+  if (!item) return;
+  doSell(item, 1, item.price);
+}
+
+function doSell(item, qty, price) {
+  if (item.qty < qty) { notify('Stock မလုံလောက်ပါ (' + item.qty + ' ခုသာကျန်သည်)'); return; }
+  item.qty -= qty;
+  const now = new Date();
+  const timeStr = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+  sales.push({
+    id: Date.now(),
+    itemId: item.id,
+    itemName: item.name,
+    qty,
+    price,
+    cost: item.cost,
+    total: qty * price,
+    profit: qty * (price - item.cost),
+    time: timeStr
+  });
+  save(); renderAll();
+  notify(item.name + ' × ' + qty + ' → ' + (qty * price) + ' ဘတ် ✓');
+
+  if (item.qty <= item.alert) {
+    setTimeout(() => notify('⚠️ ' + item.name + ' ' + item.qty + ' ခုသာကျန်ပြီ!'), 1500);
+  }
+}
+
+// ==================== VOICE ====================
+function toggleVoice() {
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    notify('ဤ browser သည် voice ကို မထောက်ပံ့ပါ'); return;
+  }
+
+  if (isListening) {
+    stopVoice(); return;
+  }
+
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  recognition = new SR();
+  recognition.lang = 'my-MM';
+  recognition.interimResults = true;
+  recognition.continuous = false;
+
+  recognition.onstart = () => {
+    isListening = true;
+    document.getElementById('voiceBtn').classList.add('listening');
+    document.getElementById('voiceBtn').textContent = '⏹️';
+    document.getElementById('voiceStatus').textContent = 'နားထောင်နေသည်...';
+    document.getElementById('voiceTranscript').textContent = '';
+    document.getElementById('voiceTranscript').classList.remove('has-text');
+  };
+
+  recognition.onresult = (e) => {
+    let interim = '', final = '';
+    for (let i = 0; i < e.results.length; i++) {
+      if (e.results[i].isFinal) final += e.results[i][0].transcript;
+      else interim += e.results[i][0].transcript;
+    }
+    const text = (final || interim).trim();
+    const el = document.getElementById('voiceTranscript');
+    el.textContent = text;
+    el.classList.toggle('has-text', !!text);
+    if (final) parseVoice(final.trim());
+  };
+
+  recognition.onerror = (e) => {
+    stopVoice();
+    if (e.error === 'no-speech') notify('အသံမကြားရပါ');
+    else notify('အမှား: ' + e.error);
+  };
+
+  recognition.onend = () => stopVoice();
+  recognition.start();
+}
+
+function stopVoice() {
+  isListening = false;
+  if (recognition) { try { recognition.stop(); } catch(e){} }
+  document.getElementById('voiceBtn').classList.remove('listening');
+  document.getElementById('voiceBtn').textContent = '🎤';
+  document.getElementById('voiceStatus').textContent = 'နှိပ်ပါ';
+}
+
+function parseVoice(text) {
+  // Extract qty: digits + မြန်မာနံပါတ်
+  const myanmarNums = {'၀':0,'၁':1,'၂':2,'၃':3,'၄':4,'၅':5,'၆':6,'၇':7,'၈':8,'၉':9};
+  let normalized = text;
+  for (const [k,v] of Object.entries(myanmarNums)) {
+    normalized = normalized.replaceAll(k, v);
+  }
+
+  // Find numbers
+  const nums = [...normalized.matchAll(/\d+\.?\d*/g)].map(m => parseFloat(m[0]));
+  let detectedQty = 1, detectedPrice = null;
+
+  // Heuristic: smaller number = qty, larger = price
+  if (nums.length === 1) {
+    if (nums[0] <= 10) detectedQty = nums[0];
+    else detectedPrice = nums[0];
+  } else if (nums.length >= 2) {
+    // Check for patterns like "x ဘူး y ဘတ်"
+    detectedQty = nums[0] <= 20 ? nums[0] : 1;
+    detectedPrice = nums[nums.length - 1];
+    if (detectedPrice === detectedQty) detectedPrice = null;
+  }
+
+  // Match item by name fragment
+  let matchedItem = null;
+  const lower = text.toLowerCase();
+  for (const item of items) {
+    const itemLower = item.name.toLowerCase();
+    // Check each word of item name
+    const words = itemLower.split(/[\s\/\-]/);
+    for (const word of words) {
+      if (word.length >= 2 && lower.includes(word)) {
+        matchedItem = item;
+        break;
+      }
+    }
+    if (matchedItem) break;
+  }
+
+  // Common Myanmar drink keywords
+  const keywords = {
+    'coke': 'Coke', 'coca': 'Coke', 'ကိုးကာ': 'Coke',
+    'pepsi': 'Pepsi', 'ပယ်ဆီ': 'Pepsi',
+    'sprite': 'Sprite', 'orange': 'Orange',
+    'water': 'Water', 'ရေ': 'Water',
+    'green tea': 'Green Tea', 'သဘာဝ': 'Green Tea',
+    'red bull': 'Red Bull', 'နွားနီ': 'Red Bull',
+    '100': '100 Plus', 'plus': '100 Plus'
+  };
+
+  if (!matchedItem) {
+    for (const [kw, label] of Object.entries(keywords)) {
+      if (lower.includes(kw)) {
+        matchedItem = items.find(i => i.name.toLowerCase().includes(kw) || i.name.toLowerCase().includes(label.toLowerCase()));
+        break;
+      }
+    }
+  }
+
+  voiceParsed = {
+    item: matchedItem,
+    qty: detectedQty || 1,
+    price: detectedPrice
+  };
+
+  const preview = document.getElementById('parsedPreview');
+  preview.classList.add('show');
+  document.getElementById('pvItem').textContent = matchedItem ? matchedItem.name : '❓ မရှာမတွေ့';
+  document.getElementById('pvQty').textContent = detectedQty || 1;
+  document.getElementById('pvPrice').textContent = detectedPrice ? detectedPrice + ' ဘတ်' : (matchedItem ? matchedItem.price + ' ဘတ် (default)' : '-');
+  document.getElementById('confirmVoiceBtn').style.display = matchedItem ? 'block' : 'none';
+}
+
+function confirmVoiceSale() {
+  if (!voiceParsed || !voiceParsed.item) return;
+  doSell(voiceParsed.item, voiceParsed.qty, voiceParsed.price || voiceParsed.item.price);
+  clearVoice();
+  switchTab('sell');
+}
+
+function clearVoice() {
+  voiceParsed = null;
+  document.getElementById('voiceTranscript').textContent = 'ဘာများပြောသနည်း...';
+  document.getElementById('voiceTranscript').classList.remove('has-text');
+  document.getElementById('parsedPreview').classList.remove('show');
+  document.getElementById('confirmVoiceBtn').style.display = 'none';
+}
+
+// ==================== RENDER ====================
+function renderAll() {
+  renderItemList();
+  renderSelects();
+  renderQuickSell();
+  renderSalesLog();
+  renderSummary();
+}
+
+function renderItemList() {
+  const el = document.getElementById('itemList');
+  if (!items.length) { el.innerHTML = '<div class="empty-state">ပစ္စည်းများ မထည့်ရသေးပါ</div>'; return; }
+  el.innerHTML = items.map(item => {
+    const stockClass = item.qty <= 0 ? 'stock-low' : item.qty <= item.alert ? 'stock-low' : item.qty <= item.alert * 2 ? 'stock-mid' : '';
+    return `<div class="item-row">
+      <div class="item-name">${item.name}</div>
+      <div class="item-price">${item.price} ဘတ်</div>
+      <div class="item-stock ${stockClass}">${item.qty} ခု</div>
+      <button class="btn btn-danger" onclick="deleteItem(${item.id})">🗑</button>
+    </div>`;
+  }).join('');
+}
+
+function renderSelects() {
+  const opts = items.map(i => `<option value="${i.id}">${i.name} (${i.qty})</option>`).join('');
+  const emptyOpt = '<option value="">-- ရွေးပါ --</option>';
+  document.getElementById('restockItem').innerHTML = emptyOpt + opts;
+  document.getElementById('sellItem').innerHTML = emptyOpt + opts;
+}
+
+function renderQuickSell() {
+  const el = document.getElementById('quickSellGrid');
+  if (!items.length) { el.innerHTML = '<div class="empty-state" style="grid-column:span 2">ပစ္စည်းများ မထည့်ရသေးပါ</div>'; return; }
+  el.innerHTML = items.map(item => `
+    <button class="quick-btn" onclick="quickSell(${item.id})" ${item.qty <= 0 ? 'disabled style="opacity:0.4"' : ''}>
+      <span class="q-name">${item.name}</span>
+      <span class="q-price">${item.price} ဘတ်</span>
+      <span class="q-stock">ကျန် ${item.qty} ခု</span>
+    </button>`).join('');
+}
+
+function renderSalesLog() {
+  const el = document.getElementById('salesLog');
+  if (!sales.length) { el.innerHTML = '<div class="empty-state">မရောင်းရသေးပါ</div>'; return; }
+  el.innerHTML = [...sales].reverse().slice(0, 30).map(s => `
+    <div class="sale-row">
+      <div class="sale-time">${s.time}</div>
+      <div class="sale-detail">${s.itemName} × ${s.qty}</div>
+      <div class="sale-total">+${s.total}</div>
+    </div>`).join('');
+}
+
+function renderSummary() {
+  const revenue = sales.reduce((a,s) => a + s.total, 0);
+  const profit = sales.reduce((a,s) => a + s.profit, 0);
+  const units = sales.reduce((a,s) => a + s.qty, 0);
+  document.getElementById('statRevenue').textContent = revenue.toLocaleString();
+  document.getElementById('statProfit').textContent = profit.toLocaleString();
+  document.getElementById('statTxCount').textContent = sales.length;
+  document.getElementById('statUnits').textContent = units;
+
+  // Stock summary
+  const ss = document.getElementById('stockSummary');
+  if (!items.length) { ss.innerHTML = '<div class="empty-state">ပစ္စည်းများ မထည့်ရသေးပါ</div>'; }
+  else {
+    ss.innerHTML = items.map(item => {
+      const isLow = item.qty <= item.alert;
+      return `<div class="item-row">
+        <div class="item-name">${item.name} <span class="chip ${isLow ? 'chip-low' : 'chip-ok'}">${isLow ? 'နည်းသည်' : 'ရှိသည်'}</span></div>
+        <div class="item-stock ${isLow ? 'stock-low' : ''}">${item.qty} ခု</div>
+      </div>`;
+    }).join('');
+  }
+
+  // Item sales summary
+  const is = document.getElementById('itemSummary');
+  if (!sales.length) { is.innerHTML = '<div class="empty-state">မရောင်းရသေးပါ</div>'; return; }
+  const itemMap = {};
+  for (const s of sales) {
+    if (!itemMap[s.itemName]) itemMap[s.itemName] = { qty: 0, total: 0, profit: 0 };
+    itemMap[s.itemName].qty += s.qty;
+    itemMap[s.itemName].total += s.total;
+    itemMap[s.itemName].profit += s.profit;
+  }
+  is.innerHTML = Object.entries(itemMap).sort((a,b) => b[1].total - a[1].total).map(([name, d]) =>
+    `<div class="item-row">
+      <div class="item-name">${name}</div>
+      <div style="font-size:0.75rem; color:var(--muted)">${d.qty} ခု</div>
+      <div class="item-stock">${d.total} ဘတ်</div>
+    </div>`).join('');
+}
+
+// ==================== TABS ====================
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach((t,i) => {
+    const panels = ['stock','sell','voice','summary'];
+    t.classList.toggle('active', panels[i] === tab);
+  });
+  document.querySelectorAll('.panel').forEach(p => {
+    p.classList.toggle('active', p.id === 'panel-' + tab);
+  });
+  if (tab === 'summary') renderSummary();
+}
+
+// ==================== UTILS ====================
+function resetDaySales() {
+  if (!confirm('ယနေ့ ရောင်းချမှတ်တမ်းများ ဖျက်မည်လား?\n(Stock လက်ကျန်မပြောင်းဘဲ ရောင်းချမှတ်တမ်းသာ သန့်ရှင်းမည်)')) return;
+  sales = [];
+  save(); renderAll();
+  notify('မှတ်တမ်းများ သန့်ရှင်းပြီး ✓');
+}
+
+function notify(msg) {
+  const el = document.getElementById('notification');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2500);
+}
+
+init();
+
+// ==================== PWA ====================
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
+
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById('installBanner').style.display = 'flex';
+});
+
+window.addEventListener('appinstalled', () => {
+  document.getElementById('installBanner').style.display = 'none';
+  deferredPrompt = null;
+});
+
+function installApp() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => {
+      deferredPrompt = null;
+      document.getElementById('installBanner').style.display = 'none';
+    });
+  }
+}
+
+function dismissInstall() {
+  document.getElementById('installBanner').style.display = 'none';
+}
+</script>
+
+</body>
+</html>
