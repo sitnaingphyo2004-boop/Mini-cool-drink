@@ -3,7 +3,7 @@
 <html lang="my">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>အအေးစာရင်း</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="manifest" href="./manifest.json">
@@ -13,1051 +13,725 @@
 <meta name="apple-mobile-web-app-title" content="အအေးစာရင်း">
 <meta name="theme-color" content="#00d4aa">
 <style>
-  :root {
-    --bg: #0a0f1a;
-    --surface: #111827;
-    --card: #1a2236;
-    --border: #2a3650;
-    --accent: #00d4aa;
-    --accent2: #ff6b35;
-    --text: #e8f0fe;
-    --muted: #6b7fa3;
-    --success: #10b981;
-    --danger: #ef4444;
-    --warning: #f59e0b;
-  }
+:root{--bg:#080d18;--surface:#0f1623;--card:#141e2e;--border:#243050;--accent:#00d4aa;--accent2:#ff6b35;--text:#e8f0fe;--muted:#5a6f94;--success:#10b981;--danger:#ef4444;--warning:#f59e0b;--credit:#a78bfa;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{background:#080d18!important;color-scheme:dark;}
+body{background:#080d18!important;color:#e8f0fe!important;font-family:'Noto Sans Myanmar',sans-serif;min-height:100vh;padding-bottom:80px;-webkit-text-size-adjust:100%;}
 
-- { margin: 0; padding: 0; box-sizing: border-box; }
+header{background:linear-gradient(135deg,#080d18 0%,#0f1623 100%);border-bottom:1px solid var(–border);padding:14px 16px;padding-top:max(14px,env(safe-area-inset-top));position:sticky;top:0;z-index:200;display:flex;align-items:center;gap:10px;}
+.logo{font-size:1.2rem;font-weight:700;color:var(–accent);}
+.logo span{color:#e8f0fe;font-weight:300;}
+.header-stats{margin-left:auto;display:flex;gap:6px;align-items:center;}
+.hstat{font-family:‘IBM Plex Mono’,monospace;font-size:0.68rem;padding:4px 9px;border-radius:20px;border:1px solid var(–border);background:#0f1623;}
+.hstat.green{color:var(–success);border-color:rgba(16,185,129,0.3);}
+.hstat.orange{color:var(–credit);border-color:rgba(167,139,250,0.3);}
 
-html {
-background: #0a0f1a !important;
-color-scheme: dark;
-}
+.nav{display:flex;background:#0f1623;border-bottom:1px solid var(–border);position:sticky;top:53px;z-index:190;overflow-x:auto;scrollbar-width:none;}
+.nav::-webkit-scrollbar{display:none;}
+.nav-tab{flex:1;min-width:56px;padding:10px 4px 9px;border:none;border-bottom:2px solid transparent;background:transparent;color:var(–muted);font-family:‘Noto Sans Myanmar’,sans-serif;font-size:0.7rem;cursor:pointer;transition:all 0.2s;display:flex;flex-direction:column;align-items:center;gap:2px;}
+.nav-tab .ni{font-size:1rem;}
+.nav-tab.active{color:var(–accent);border-bottom-color:var(–accent);}
+.nbadge{background:var(–danger);color:white;font-size:0.55rem;font-family:‘IBM Plex Mono’,monospace;border-radius:10px;padding:1px 5px;display:none;}
+.nbadge.show{display:inline-block;}
 
-body {
-background: #0a0f1a !important;
-color: #e8f0fe !important;
-font-family: ‘Noto Sans Myanmar’, sans-serif;
-min-height: 100vh;
-padding-bottom: 40px;
--webkit-text-size-adjust: 100%;
-}
+.panel{display:none;animation:fadeIn 0.2s ease;}
+.panel.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.container{max-width:480px;margin:0 auto;padding:12px 14px;}
 
-header {
-background: linear-gradient(135deg, #0a0f1a 0%, #111827 100%);
-border-bottom: 1px solid var(–border);
-padding: 16px 20px;
-position: sticky;
-top: 0;
-z-index: 100;
-display: flex;
-align-items: center;
-gap: 12px;
-}
+.card{background:#141e2e!important;border:1px solid var(–border);border-radius:16px;padding:14px;margin-bottom:12px;}
+.card-title{font-size:0.7rem;color:var(–muted);letter-spacing:0.8px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:6px;}
 
-.logo {
-font-size: 1.5rem;
-font-weight: 700;
-color: var(–accent);
-letter-spacing: -0.5px;
-}
+.form-row{display:flex;gap:8px;margin-bottom:10px;align-items:flex-end;}
+.input-group{display:flex;flex-direction:column;gap:4px;flex:1;}
+label{font-size:0.68rem;color:var(–muted);}
+input,select{background:#0f1623!important;border:1px solid var(–border);border-radius:10px;color:#e8f0fe!important;font-family:‘Noto Sans Myanmar’,sans-serif;font-size:0.88rem;padding:10px 12px;outline:none;width:100%;transition:border-color 0.2s;-webkit-appearance:none;appearance:none;color-scheme:dark;}
+input:focus,select:focus{border-color:var(–accent);box-shadow:0 0 0 3px rgba(0,212,170,0.1);}
+input[type=“number”]{font-family:‘IBM Plex Mono’,monospace;}
 
-.date-badge {
-margin-left: auto;
-font-family: ‘IBM Plex Mono’, monospace;
-font-size: 0.75rem;
-color: #6b7fa3;
-background: #111827 !important;
-padding: 4px 10px;
-border-radius: 20px;
-border: 1px solid #2a3650;
-}
+.btn{padding:11px 16px;border:none;border-radius:10px;font-family:‘Noto Sans Myanmar’,sans-serif;font-size:0.85rem;cursor:pointer;font-weight:600;transition:all 0.15s;white-space:nowrap;}
+.btn-primary{background:var(–accent);color:#080d18;}
+.btn-primary:active{filter:brightness(0.9);}
+.btn-danger{background:var(–danger);color:white;padding:7px 11px;font-size:0.75rem;}
+.btn-warn{background:var(–warning);color:#080d18;}
+.btn-secondary{background:#0f1623!important;color:#e8f0fe;border:1px solid var(–border);}
+.btn-credit{background:rgba(167,139,250,0.15);color:var(–credit);border:1px solid rgba(167,139,250,0.3);}
+.btn-full{width:100%;margin-top:8px;padding:13px;}
 
-.container { max-width: 480px; margin: 0 auto; padding: 0 16px; }
+.quick-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:10px;}
+.quick-btn{background:#0f1623!important;border:1px solid var(–border);border-radius:12px;padding:12px 8px;color:#e8f0fe;font-family:‘Noto Sans Myanmar’,sans-serif;font-size:0.78rem;cursor:pointer;text-align:center;transition:all 0.15s;line-height:1.7;}
+.quick-btn:active{border-color:var(–accent);background:#141e2e!important;}
+.quick-btn:disabled{opacity:0.3;}
+.q-name{font-weight:700;display:block;font-size:0.85rem;}
+.q-price{color:var(–accent);font-family:‘IBM Plex Mono’,monospace;font-size:0.8rem;}
+.q-stock{color:var(–muted);font-size:0.67rem;}
 
-/* Tabs */
-.tabs {
-display: flex;
-gap: 4px;
-margin: 16px 0;
-background: #111827 !important;
-padding: 4px;
-border-radius: 12px;
-border: 1px solid #2a3650;
-}
+.item-row{display:flex;align-items:center;gap:8px;padding:10px 12px;background:#0f1623!important;border-radius:10px;margin-bottom:6px;border:1px solid var(–border);}
+.item-name{flex:1;font-size:0.88rem;font-weight:500;}
+.item-stock{font-family:‘IBM Plex Mono’,monospace;font-size:0.8rem;color:var(–accent);min-width:50px;text-align:right;}
+.stock-low{color:var(–danger)!important;}
+.stock-mid{color:var(–warning)!important;}
 
-.tab {
-flex: 1;
-padding: 10px 8px;
-border: none;
-border-radius: 8px;
-background: transparent;
-color: var(–muted);
-font-family: ‘Noto Sans Myanmar’, sans-serif;
-font-size: 0.82rem;
-cursor: pointer;
-transition: all 0.2s;
-font-weight: 500;
-}
+.sale-row{display:flex;align-items:center;gap:8px;padding:8px 12px;background:#0f1623!important;border-radius:8px;margin-bottom:5px;border-left:3px solid var(–accent);font-size:0.83rem;}
+.sale-time{font-family:‘IBM Plex Mono’,monospace;font-size:0.68rem;color:var(–muted);min-width:42px;}
+.sale-detail{flex:1;}
+.sale-total{font-family:‘IBM Plex Mono’,monospace;font-size:0.83rem;color:var(–success);font-weight:600;}
+.sale-del{background:none;border:none;color:var(–muted);cursor:pointer;font-size:0.9rem;padding:2px 4px;}
 
-.tab.active {
-background: var(–accent);
-color: #0a0f1a;
-font-weight: 700;
-}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+.stat-box{background:#0f1623!important;border:1px solid var(–border);border-radius:12px;padding:14px;text-align:center;}
+.stat-value{font-family:‘IBM Plex Mono’,monospace;font-size:1.1rem;font-weight:600;color:var(–accent);margin-bottom:3px;}
+.stat-label{font-size:0.66rem;color:var(–muted);}
+.stat-box.profit .stat-value{color:var(–success);}
+.stat-box.cred .stat-value{color:var(–credit);}
 
-.panel { display: none; }
-.panel.active { display: block; }
+.voice-btn{width:70px;height:70px;border-radius:50%;background:var(–accent2);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 12px;transition:all 0.2s;box-shadow:0 4px 20px rgba(255,107,53,0.3);}
+.voice-btn.listening{animation:pulse 1.2s infinite;background:var(–danger);}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(239,68,68,0.5);}70%{box-shadow:0 0 0 20px rgba(239,68,68,0);}100%{box-shadow:0 0 0 0 rgba(239,68,68,0);}}
+.voice-transcript{background:#0f1623!important;border:1px dashed var(–border);border-radius:10px;padding:12px;font-size:0.85rem;min-height:52px;color:var(–muted);margin-bottom:10px;font-style:italic;line-height:1.6;}
+.voice-transcript.has-text{color:#e8f0fe;font-style:normal;}
+.voice-hint{font-size:0.72rem;color:var(–muted);text-align:center;margin-bottom:10px;line-height:1.8;}
+.parsed-preview{background:rgba(0,212,170,0.08)!important;border:1px solid rgba(0,212,170,0.25);border-radius:10px;padding:10px 12px;font-size:0.82rem;margin-bottom:8px;display:none;}
+.parsed-preview.show{display:block;}
+.parsed-item{display:flex;justify-content:space-between;margin-bottom:4px;}
+.parsed-label{color:var(–muted);}
+.parsed-val{color:var(–accent);font-family:‘IBM Plex Mono’,monospace;font-weight:600;}
 
-/* Cards */
-.card {
-background: #1a2236 !important;
-border: 1px solid #2a3650;
-border-radius: 16px;
-padding: 16px;
-margin-bottom: 12px;
-}
+.credit-person-row{display:flex;align-items:center;gap:10px;padding:12px 14px;background:#0f1623!important;border-radius:12px;margin-bottom:8px;border:1px solid var(–border);cursor:pointer;transition:all 0.15s;}
+.credit-person-row:active{border-color:var(–credit);}
+.cp-name{font-size:0.92rem;font-weight:600;}
+.cp-count{font-size:0.67rem;color:var(–muted);margin-top:2px;}
+.cp-amount{font-family:‘IBM Plex Mono’,monospace;font-size:0.9rem;color:var(–credit);font-weight:600;margin-left:auto;}
 
-.card-title {
-font-size: 0.78rem;
-color: var(–muted);
-text-transform: uppercase;
-letter-spacing: 0.5px;
-margin-bottom: 12px;
-display: flex;
-align-items: center;
-gap: 6px;
-}
+.credit-item-row{display:flex;align-items:center;gap:8px;padding:8px 12px;background:rgba(167,139,250,0.06)!important;border-radius:8px;margin-bottom:5px;border-left:3px solid rgba(167,139,250,0.4);font-size:0.83rem;}
+.ci-detail{flex:1;}
+.ci-amount{font-family:‘IBM Plex Mono’,monospace;color:var(–credit);font-weight:600;}
+.ci-time{font-family:‘IBM Plex Mono’,monospace;font-size:0.67rem;color:var(–muted);}
 
-/* Form elements */
-.form-row {
-display: flex;
-gap: 8px;
-margin-bottom: 10px;
-align-items: center;
-}
+.credit-total-bar{background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.25);border-radius:10px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.credit-total-val{font-family:‘IBM Plex Mono’,monospace;font-size:1rem;color:var(–credit);font-weight:700;}
 
-.input-group {
-display: flex;
-flex-direction: column;
-gap: 4px;
-flex: 1;
-}
+.chip{display:inline-block;padding:2px 7px;border-radius:20px;font-size:0.67rem;font-weight:600;margin-left:5px;}
+.chip-ok{background:rgba(16,185,129,0.12);color:var(–success);}
+.chip-low{background:rgba(239,68,68,0.12);color:var(–danger);}
 
-label {
-font-size: 0.72rem;
-color: var(–muted);
-}
+.empty-state{text-align:center;padding:26px;color:var(–muted);font-size:0.82rem;}
+.section-sep{height:1px;background:var(–border);margin:14px 0;}
 
-input, select {
-background: #111827 !important;
-border: 1px solid #2a3650;
-border-radius: 8px;
-color: #e8f0fe !important;
-font-family: ‘Noto Sans Myanmar’, sans-serif;
-font-size: 0.9rem;
-padding: 10px 12px;
-outline: none;
-width: 100%;
-transition: border-color 0.2s;
--webkit-appearance: none;
-appearance: none;
-color-scheme: dark;
-}
+.notification{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(10px);background:var(–accent);color:#080d18;padding:10px 22px;border-radius:30px;font-weight:700;font-size:0.82rem;opacity:0;transition:all 0.3s;z-index:999;pointer-events:none;white-space:nowrap;box-shadow:0 4px 20px rgba(0,212,170,0.4);}
+.notification.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.notification.danger{background:var(–danger);box-shadow:0 4px 20px rgba(239,68,68,0.4);}
 
-input:focus, select:focus {
-border-color: var(–accent);
-}
-
-input[type=“number”] {
-font-family: ‘IBM Plex Mono’, monospace;
-}
-
-.btn {
-padding: 10px 16px;
-border: none;
-border-radius: 8px;
-font-family: ‘Noto Sans Myanmar’, sans-serif;
-font-size: 0.85rem;
-cursor: pointer;
-font-weight: 600;
-transition: all 0.15s;
-white-space: nowrap;
-}
-
-.btn-primary {
-background: var(–accent);
-color: #0a0f1a;
-}
-
-.btn-primary:hover { filter: brightness(1.1); }
-
-.btn-danger {
-background: var(–danger);
-color: white;
-padding: 6px 10px;
-font-size: 0.75rem;
-}
-
-.btn-warn {
-background: var(–warning);
-color: #0a0f1a;
-}
-
-.btn-secondary {
-background: #111827 !important;
-color: #e8f0fe;
-border: 1px solid var(–border);
-}
-
-.btn-full { width: 100%; margin-top: 8px; padding: 12px; }
-
-/* Voice button */
-.voice-btn {
-width: 64px;
-height: 64px;
-border-radius: 50%;
-background: var(–accent2);
-border: none;
-cursor: pointer;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 1.6rem;
-margin: 0 auto 12px;
-transition: all 0.2s;
-box-shadow: 0 0 0 0 rgba(255,107,53,0.4);
-}
-
-.voice-btn.listening {
-animation: pulse 1.2s infinite;
-background: var(–danger);
-}
-
-@keyframes pulse {
-0% { box-shadow: 0 0 0 0 rgba(239,68,68,0.5); }
-70% { box-shadow: 0 0 0 18px rgba(239,68,68,0); }
-100% { box-shadow: 0 0 0 0 rgba(239,68,68,0); }
-}
-
-.voice-transcript {
-background: #111827 !important;
-border: 1px dashed #2a3650;
-border-radius: 10px;
-padding: 12px;
-font-size: 0.85rem;
-min-height: 52px;
-color: var(–muted);
-margin-bottom: 10px;
-font-style: italic;
-line-height: 1.6;
-}
-
-.voice-transcript.has-text { color: var(–text); font-style: normal; }
-
-/* Items list */
-.item-row {
-display: flex;
-align-items: center;
-gap: 8px;
-padding: 10px 12px;
-background: #111827 !important;
-border-radius: 10px;
-margin-bottom: 6px;
-border: 1px solid #2a3650;
-}
-
-.item-name {
-flex: 1;
-font-size: 0.9rem;
-font-weight: 500;
-}
-
-.item-stock {
-font-family: ‘IBM Plex Mono’, monospace;
-font-size: 0.82rem;
-color: var(–accent);
-min-width: 60px;
-text-align: right;
-}
-
-.item-price {
-font-family: ‘IBM Plex Mono’, monospace;
-font-size: 0.78rem;
-color: var(–muted);
-min-width: 70px;
-text-align: right;
-}
-
-.stock-low { color: var(–danger) !important; }
-.stock-mid { color: var(–warning) !important; }
-
-/* Sales log */
-.sale-row {
-display: flex;
-align-items: center;
-gap: 8px;
-padding: 8px 12px;
-background: #111827 !important;
-border-radius: 8px;
-margin-bottom: 5px;
-border-left: 3px solid #00d4aa;
-font-size: 0.85rem;
-}
-
-.sale-time {
-font-family: ‘IBM Plex Mono’, monospace;
-font-size: 0.72rem;
-color: var(–muted);
-min-width: 48px;
-}
-
-.sale-detail { flex: 1; }
-.sale-total {
-font-family: ‘IBM Plex Mono’, monospace;
-font-size: 0.85rem;
-color: var(–success);
-font-weight: 600;
-}
-
-/* Summary stats */
-.stats-grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 10px;
-margin-bottom: 14px;
-}
-
-.stat-box {
-background: #111827 !important;
-border: 1px solid #2a3650;
-border-radius: 12px;
-padding: 14px;
-text-align: center;
-}
-
-.stat-value {
-font-family: ‘IBM Plex Mono’, monospace;
-font-size: 1.3rem;
-font-weight: 600;
-color: var(–accent);
-margin-bottom: 4px;
-}
-
-.stat-label {
-font-size: 0.72rem;
-color: var(–muted);
-}
-
-.empty-state {
-text-align: center;
-padding: 30px;
-color: var(–muted);
-font-size: 0.85rem;
-}
-
-/* Quick sell */
-.quick-grid {
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-gap: 8px;
-margin-bottom: 12px;
-}
-
-.quick-btn {
-background: #111827 !important;
-border: 1px solid #2a3650;
-border-radius: 10px;
-padding: 12px 8px;
-color: var(–text);
-font-family: ‘Noto Sans Myanmar’, sans-serif;
-font-size: 0.8rem;
-cursor: pointer;
-text-align: center;
-transition: all 0.15s;
-line-height: 1.5;
-}
-
-.quick-btn:hover {
-border-color: var(–accent);
-background: rgba(0,212,170,0.08);
-}
-
-.quick-btn .q-name { font-weight: 600; display: block; }
-.quick-btn .q-price { color: var(–accent); font-family: ‘IBM Plex Mono’, monospace; font-size: 0.78rem; }
-.quick-btn .q-stock { color: var(–muted); font-size: 0.72rem; }
-
-.notification {
-position: fixed;
-bottom: 20px;
-left: 50%;
-transform: translateX(-50%);
-background: var(–accent);
-color: #0a0f1a;
-padding: 10px 20px;
-border-radius: 30px;
-font-weight: 600;
-font-size: 0.85rem;
-opacity: 0;
-transition: opacity 0.3s;
-z-index: 999;
-pointer-events: none;
-white-space: nowrap;
-}
-
-.notification.show { opacity: 1; }
-
-.section-sep {
-height: 1px;
-background: var(–border);
-margin: 14px 0;
-}
-
-.voice-hint {
-font-size: 0.72rem;
-color: var(–muted);
-text-align: center;
-margin-bottom: 8px;
-}
-
-.parsed-preview {
-background: rgba(0,212,170,0.12) !important;
-border: 1px solid rgba(0,212,170,0.3);
-border-radius: 8px;
-padding: 10px 12px;
-font-size: 0.82rem;
-margin-bottom: 8px;
-display: none;
-}
-
-.parsed-preview.show { display: block; }
-.parsed-item { display: flex; justify-content: space-between; margin-bottom: 4px; }
-.parsed-label { color: var(–muted); }
-.parsed-val { color: var(–accent); font-family: ‘IBM Plex Mono’, monospace; font-weight: 600; }
-
-.chip {
-display: inline-block;
-padding: 2px 8px;
-border-radius: 20px;
-font-size: 0.7rem;
-font-weight: 600;
-margin-left: 6px;
-}
-
-.chip-ok { background: rgba(16,185,129,0.15); color: var(–success); }
-.chip-low { background: rgba(239,68,68,0.15); color: var(–danger); }
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:500;align-items:flex-end;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal{background:#141e2e;border:1px solid var(–border);border-top:1px solid rgba(0,212,170,0.2);border-radius:20px 20px 0 0;padding:20px 16px;width:100%;max-width:480px;padding-bottom:max(20px,env(safe-area-inset-bottom));animation:slideUp 0.25s ease;}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.modal-title{font-size:1rem;font-weight:700;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;}
+.modal-close{background:none;border:none;color:var(–muted);font-size:1.4rem;cursor:pointer;padding:0 4px;}
 </style>
 
 </head>
 <body>
 
 <header>
-  <div class="logo">🧊 အအေးစာရင်း</div>
-  <div class="date-badge" id="headerDate"></div>
+  <div class="logo">🧊 <span>အအေးစာရင်း</span></div>
+  <div class="header-stats">
+    <div class="hstat green" id="hRevenue">฿0</div>
+    <div class="hstat orange" id="hCredit">💜 ฿0</div>
+  </div>
 </header>
 
-<div class="container">
+<nav class="nav">
+  <button class="nav-tab active" onclick="switchTab('stock')"><span class="ni">📦</span>ပစ္စည်း</button>
+  <button class="nav-tab" onclick="switchTab('sell')"><span class="ni">💰</span>ရောင်းချ</button>
+  <button class="nav-tab" onclick="switchTab('voice')"><span class="ni">🎤</span>အသံ</button>
+  <button class="nav-tab" onclick="switchTab('credit')"><span class="ni">📋</span>အကြွေး<span class="nbadge" id="creditBadge">0</span></button>
+  <button class="nav-tab" onclick="switchTab('summary')"><span class="ni">📊</span>ချုပ်</button>
+</nav>
 
-  <div class="tabs">
-    <button class="tab active" onclick="switchTab('stock')">📦 ပစ္စည်း</button>
-    <button class="tab" onclick="switchTab('sell')">💰 ရောင်းချ</button>
-    <button class="tab" onclick="switchTab('voice')">🎤 အသံ</button>
-    <button class="tab" onclick="switchTab('summary')">📊 ချုပ်</button>
+<!-- ══ STOCK ══ -->
+
+<div class="panel active" id="panel-stock"><div class="container">
+  <div class="card">
+    <div class="card-title">➕ ပစ္စည်းသစ်ထည့်ရန်</div>
+    <div class="form-row">
+      <div class="input-group" style="flex:2"><label>အမည်</label><input type="text" id="newItemName" placeholder="Coke 325ml"></div>
+    </div>
+    <div class="form-row">
+      <div class="input-group"><label>ဝယ်ဈေး (฿)</label><input type="number" id="newItemCost" placeholder="10.40" step="0.01"></div>
+      <div class="input-group"><label>ရောင်းဈေး (฿)</label><input type="number" id="newItemPrice" placeholder="12" step="0.01"></div>
+    </div>
+    <div class="form-row">
+      <div class="input-group"><label>အဝင်ပမာဏ</label><input type="number" id="newItemQty" placeholder="24"></div>
+      <div class="input-group"><label>သတိပေးသည့်ပမာဏ</label><input type="number" id="newItemAlert" placeholder="5"></div>
+    </div>
+    <button class="btn btn-primary btn-full" onclick="addItem()">✚ ထည့်မည်</button>
   </div>
-
-  <!-- STOCK TAB -->
-
-  <div class="panel active" id="panel-stock">
-    <div class="card">
-      <div class="card-title">➕ ပစ္စည်းသစ်ထည့်ရန်</div>
-      <div class="form-row">
-        <div class="input-group">
-          <label>အမည်</label>
-          <input type="text" id="newItemName" placeholder="ဥပမာ - Coke 325ml">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="input-group">
-          <label>ဝယ်ဈေး (ဘတ်)</label>
-          <input type="number" id="newItemCost" placeholder="12">
-        </div>
-        <div class="input-group">
-          <label>ရောင်းဈေး (ဘတ်)</label>
-          <input type="number" id="newItemPrice" placeholder="15">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="input-group">
-          <label>အဝင်ပမာဏ</label>
-          <input type="number" id="newItemQty" placeholder="24">
-        </div>
-        <div class="input-group">
-          <label>သတိပေးပမာဏ</label>
-          <input type="number" id="newItemAlert" placeholder="5">
-        </div>
-      </div>
-      <button class="btn btn-primary btn-full" onclick="addItem()">ထည့်မည်</button>
-    </div>
-
-```
-<div class="card">
-  <div class="card-title">📋 ပစ္စည်းစာရင်း</div>
-  <div id="itemList"><div class="empty-state">ပစ္စည်းများ မထည့်ရသေးပါ</div></div>
-</div>
-
-<div class="card">
-  <div class="card-title">🔄 Stock ဖြည့်ရန် (Restock)</div>
-  <div class="form-row">
-    <div class="input-group">
-      <label>ပစ္စည်းရွေးချယ်</label>
-      <select id="restockItem"></select>
-    </div>
-    <div class="input-group">
-      <label>ဖြည့်ပမာဏ</label>
-      <input type="number" id="restockQty" placeholder="24">
-    </div>
+  <div class="card">
+    <div class="card-title">📋 ပစ္စည်းစာရင်း</div>
+    <div id="itemList"><div class="empty-state">ပစ္စည်းများ မထည့်ရသေးပါ</div></div>
   </div>
-  <button class="btn btn-warn btn-full" onclick="restock()">Stock ဖြည့်မည်</button>
-</div>
-```
-
+  <div class="card">
+    <div class="card-title">🔄 Stock ဖြည့်ရန်</div>
+    <div class="form-row">
+      <div class="input-group" style="flex:2"><label>ပစ္စည်း</label><select id="restockItem"></select></div>
+      <div class="input-group"><label>ဖြည့်ပမာဏ</label><input type="number" id="restockQty" placeholder="24"></div>
+    </div>
+    <button class="btn btn-warn btn-full" onclick="restock()">🔄 Stock ဖြည့်မည်</button>
   </div>
+</div></div>
 
-  <!-- SELL TAB -->
+<!-- ══ SELL ══ -->
 
-  <div class="panel" id="panel-sell">
-    <div class="card">
-      <div class="card-title">⚡ အမြန်ရောင်းရန်</div>
-      <div class="quick-grid" id="quickSellGrid"></div>
+<div class="panel" id="panel-sell"><div class="container">
+  <div class="card">
+    <div class="card-title">⚡ အမြန်ရောင်းရန် — နှိပ်ရုံ</div>
+    <div class="quick-grid" id="quickSellGrid"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">✏️ ပမာဏ / ဈေးပြင်၍ ရောင်းရန်</div>
+    <div class="form-row">
+      <div class="input-group" style="flex:2"><label>ပစ္စည်း</label><select id="sellItem"></select></div>
+      <div class="input-group"><label>အရေအတွက်</label><input type="number" id="sellQty" value="1" min="1"></div>
     </div>
-
-```
-<div class="card">
-  <div class="card-title">✏️ ကိုယ်တိုင်ထည့်ရန်</div>
-  <div class="form-row">
-    <div class="input-group">
-      <label>ပစ္စည်းရွေး</label>
-      <select id="sellItem"></select>
+    <div class="form-row">
+      <div class="input-group"><label>ရောင်းဈေး (ပြင်နိုင်)</label><input type="number" id="sellPrice" placeholder="auto" step="0.01"></div>
     </div>
-    <div class="input-group">
-      <label>အရေအတွက်</label>
-      <input type="number" id="sellQty" value="1" min="1">
+    <div style="display:flex;gap:8px;">
+      <button class="btn btn-primary btn-full" onclick="sellItem()">💰 ရောင်းမည်</button>
+      <button class="btn btn-credit btn-full" onclick="openCreditSell()">📋 အကြွေး</button>
     </div>
   </div>
-  <div class="form-row">
-    <div class="input-group">
-      <label>ရောင်းဈေး (ပြင်နိုင်)</label>
-      <input type="number" id="sellPrice" placeholder="auto">
+  <div class="card">
+    <div class="card-title">🧾 ယနေ့ ရောင်းချမှတ်တမ်း</div>
+    <div id="salesLog"><div class="empty-state">မရောင်းရသေးပါ</div></div>
+  </div>
+</div></div>
+
+<!-- ══ VOICE ══ -->
+
+<div class="panel" id="panel-voice"><div class="container">
+  <div class="card">
+    <div class="card-title">🎤 အသံဖြင့် မှတ်တမ်းတင်</div>
+    <div class="voice-hint">မိုက်ခ်ကိုနှိပ်ပြီး ပြောပါ<br><small>ဥပမာ — "Coffee 2 ဘူး 34 ဘတ်"</small></div>
+    <button class="voice-btn" id="voiceBtn" onclick="toggleVoice()">🎤</button>
+    <div id="voiceStatus" style="text-align:center;font-size:0.74rem;color:var(--muted);margin-bottom:10px;">နှိပ်ပါ</div>
+    <div class="voice-transcript" id="voiceTranscript">ဘာများပြောသနည်း...</div>
+    <div class="parsed-preview" id="parsedPreview">
+      <div class="parsed-item"><span class="parsed-label">ပစ္စည်း</span><span class="parsed-val" id="pvItem">-</span></div>
+      <div class="parsed-item"><span class="parsed-label">အရေအတွက်</span><span class="parsed-val" id="pvQty">-</span></div>
+      <div class="parsed-item"><span class="parsed-label">ဈေး</span><span class="parsed-val" id="pvPrice">-</span></div>
+    </div>
+    <button class="btn btn-primary btn-full" id="confirmVoiceBtn" onclick="confirmVoiceSale()" style="display:none">✅ ရောင်းမှတ်မည်</button>
+    <button class="btn btn-credit btn-full" id="confirmVoiceCreditBtn" onclick="openVoiceCreditModal()" style="display:none;margin-top:6px">📋 အကြွေးမှတ်မည်</button>
+    <button class="btn btn-secondary btn-full" onclick="clearVoice()" style="margin-top:6px">✕ ဖျက်မည်</button>
+  </div>
+  <div class="card">
+    <div class="card-title">📖 ပြောနည်းဥပမာ</div>
+    <div style="font-size:0.82rem;line-height:2.3;color:var(--muted);">
+      <div>💬 <span style="color:#e8f0fe">"Coffee 2 ဘူး 34 ဘတ်"</span></div>
+      <div>💬 <span style="color:#e8f0fe">"M150 ၃ ဘူး"</span></div>
+      <div>💬 <span style="color:#e8f0fe">"oshI 5 ဘူး 50"</span></div>
+      <div>💬 <span style="color:#e8f0fe">"အုန်းရည် တစ်ဘူး"</span></div>
     </div>
   </div>
-  <button class="btn btn-primary btn-full" onclick="sellItem()">ရောင်းမည်</button>
-</div>
+</div></div>
 
-<div class="card">
-  <div class="card-title">🧾 ယနေ့ ရောင်းချမှတ်တမ်း</div>
-  <div id="salesLog"><div class="empty-state">မရောင်းရသေးပါ</div></div>
-</div>
-```
+<!-- ══ CREDIT ══ -->
 
-  </div>
-
-  <!-- VOICE TAB -->
-
-  <div class="panel" id="panel-voice">
-    <div class="card">
-      <div class="card-title">🎤 အသံဖြင့် မှတ်တမ်းတင်</div>
-      <div class="voice-hint">မိုက်ခ်ကိုနှိပ်ပြီး ပြောပါ<br><small style="opacity:0.6">ဥပမာ - "Coke တစ်ဘူး ပင်တုန်းဆယ့်ငါးဘတ်"</small></div>
-      <button class="voice-btn" id="voiceBtn" onclick="toggleVoice()">🎤</button>
-      <div id="voiceStatus" style="text-align:center; font-size:0.78rem; color:var(--muted); margin-bottom:10px;">နှိပ်ပါ</div>
-      <div class="voice-transcript" id="voiceTranscript">ဘာများပြောသနည်း...</div>
-
-```
-  <div class="parsed-preview" id="parsedPreview">
-    <div class="parsed-item"><span class="parsed-label">ပစ္စည်း</span><span class="parsed-val" id="pvItem">-</span></div>
-    <div class="parsed-item"><span class="parsed-label">အရေအတွက်</span><span class="parsed-val" id="pvQty">-</span></div>
-    <div class="parsed-item"><span class="parsed-label">ဈေး</span><span class="parsed-val" id="pvPrice">-</span></div>
-  </div>
-
-  <button class="btn btn-primary btn-full" id="confirmVoiceBtn" onclick="confirmVoiceSale()" style="display:none">✅ ဒါမှန်တယ်၊ မှတ်မည်</button>
-  <button class="btn btn-secondary btn-full" onclick="clearVoice()" style="margin-top:6px">ဖျက်မည်</button>
-</div>
-
-<div class="card">
-  <div class="card-title">📖 ပြောနည်းဥပမာများ</div>
-  <div style="font-size:0.82rem; line-height:2; color:var(--muted);">
-    <div>💬 <span style="color:var(--text)">"Coke ၂ ဘူး ၃၀ ဘတ်"</span></div>
-    <div>💬 <span style="color:var(--text)">"ရေတစ်ဘူး ၁၅ ဘတ်"</span></div>
-    <div>💬 <span style="color:var(--text)">"Pepsi ၃ ဘူး ၄၅ ဘတ်"</span></div>
-    <div>💬 <span style="color:var(--text)">"orange ၁ can ၂၀ ဘတ်"</span></div>
-  </div>
-</div>
-```
-
-  </div>
-
-  <!-- SUMMARY TAB -->
-
-  <div class="panel" id="panel-summary">
-    <div class="card">
-      <div class="card-title">📊 ယနေ့ ချုပ်စာရင်း</div>
-      <div class="stats-grid">
-        <div class="stat-box">
-          <div class="stat-value" id="statRevenue">0</div>
-          <div class="stat-label">ရောင်းရငွေ (ဘတ်)</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-value" id="statProfit" style="color:var(--success)">0</div>
-          <div class="stat-label">အမြတ် (ဘတ်)</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-value" id="statTxCount">0</div>
-          <div class="stat-label">ရောင်းချအကြိမ်</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-value" id="statUnits">0</div>
-          <div class="stat-label">ရောင်းထွက်ပမာဏ</div>
-        </div>
-      </div>
+<div class="panel" id="panel-credit"><div class="container">
+  <div class="card">
+    <div class="card-title">👤 လူသစ်ထည့်ရန်</div>
+    <div class="form-row">
+      <div class="input-group"><label>နာမည်</label><input type="text" id="newPersonName" placeholder="ဥပမာ - မောင်မောင်"></div>
+      <button class="btn btn-primary" style="margin-top:18px;flex-shrink:0" onclick="addPerson()">ထည့်</button>
     </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <span>📋 အကြွေးစာရင်း</span>
+      <span id="totalCreditDisplay" style="font-family:'IBM Plex Mono',monospace;font-size:0.82rem;color:var(--credit);">฿0</span>
+    </div>
+    <div id="creditPersonList"><div class="empty-state">အကြွေးမှတ်တမ်း မရှိသေးပါ</div></div>
+  </div>
+</div></div>
 
-```
-<div class="card">
-  <div class="card-title">📦 လက်ကျန် Stock</div>
-  <div id="stockSummary"><div class="empty-state">ပစ္စည်းများ မထည့်ရသေးပါ</div></div>
+<!-- ══ SUMMARY ══ -->
+
+<div class="panel" id="panel-summary"><div class="container">
+  <div class="stats-grid">
+    <div class="stat-box"><div class="stat-value" id="statRevenue">฿0</div><div class="stat-label">ရောင်းရငွေ</div></div>
+    <div class="stat-box profit"><div class="stat-value" id="statProfit">฿0</div><div class="stat-label">အမြတ်</div></div>
+    <div class="stat-box"><div class="stat-value" id="statTxCount">0</div><div class="stat-label">ရောင်းအကြိမ်</div></div>
+    <div class="stat-box cred"><div class="stat-value" id="statCredit">฿0</div><div class="stat-label">အကြွေးကျန်</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">📦 Stock လက်ကျန်</div>
+    <div id="stockSummary"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">📈 ပစ္စည်းအလိုက် ရောင်းချ</div>
+    <div id="itemSummary"><div class="empty-state">မရောင်းရသေးပါ</div></div>
+  </div>
+  <div class="section-sep"></div>
+  <button class="btn btn-secondary btn-full" onclick="exportSummary()">📤 ယနေ့ ချုပ်စာ Copy ကူးမည်</button>
+  <button class="btn btn-danger btn-full" style="margin-top:8px" onclick="resetDaySales()">🔄 နေ့ချုပ် — ရောင်းမှတ်တမ်း သန့်ရှင်းမည်</button>
+</div></div>
+
+<!-- ══ MODALS ══ -->
+
+<div class="modal-overlay" id="creditSellModal">
+  <div class="modal">
+    <div class="modal-title">📋 အကြွေးရောင်း <button class="modal-close" onclick="closeModal('creditSellModal')">✕</button></div>
+    <div class="input-group" style="margin-bottom:12px"><label>လူကို ရွေးပါ</label><select id="creditPersonSelect"></select></div>
+    <div id="creditSellPreview" style="background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.2);border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:0.85rem;"></div>
+    <button class="btn btn-credit btn-full" onclick="confirmCreditSell()" style="margin-top:0">✓ အကြွေးမှတ်မည်</button>
+  </div>
 </div>
 
-<div class="card">
-  <div class="card-title">📈 ပစ္စည်းအလိုက် ရောင်းချမှတ်တမ်း</div>
-  <div id="itemSummary"><div class="empty-state">မရောင်းရသေးပါ</div></div>
-</div>
-
-<div class="section-sep"></div>
-<button class="btn btn-danger btn-full" onclick="resetDaySales()">🔄 နေ့ချုပ်ပြီး ရောင်းချမှတ်တမ်း သန့်ရှင်းမည်</button>
-```
-
+<div class="modal-overlay" id="creditDetailModal">
+  <div class="modal">
+    <div class="modal-title"><span id="creditDetailName">-</span><button class="modal-close" onclick="closeModal('creditDetailModal')">✕</button></div>
+    <div class="credit-total-bar">
+      <span style="font-size:0.78rem;color:var(--muted);">စုစုပေါင်းကြွေး</span>
+      <span class="credit-total-val" id="creditDetailTotal">฿0</span>
+    </div>
+    <div id="creditDetailItems" style="max-height:260px;overflow-y:auto;margin-bottom:12px;"></div>
+    <div style="display:flex;gap:8px;">
+      <button class="btn btn-primary btn-full" onclick="settleCredit()">✅ ကြွေးဆပ်ပြီ</button>
+      <button class="btn btn-danger" style="margin-top:8px;flex-shrink:0;padding:13px 14px" onclick="deletePerson()">🗑</button>
+    </div>
   </div>
 </div>
 
 <div class="notification" id="notification"></div>
-
-<!-- PWA Install Banner -->
-
-<div id="installBanner" style="display:none; position:fixed; bottom:0; left:0; right:0; background:linear-gradient(135deg,#1a2236,#111827); border-top:1px solid #00d4aa; padding:14px 16px; align-items:center; gap:12px; z-index:9999; max-width:480px; margin:0 auto;">
-  <div style="font-size:1.6rem">🧊</div>
-  <div style="flex:1">
-    <div style="font-family:'Noto Sans Myanmar',sans-serif; font-size:0.85rem; font-weight:700; color:#e8f0fe;">App အဖြစ်တပ်ဆင်ရန်</div>
-    <div style="font-family:'Noto Sans Myanmar',sans-serif; font-size:0.72rem; color:#6b7fa3; margin-top:2px;">Homescreen မှ တိုက်ရိုက်ဖွင့်နိုင်မည်</div>
-  </div>
-  <button onclick="installApp()" style="background:#00d4aa; color:#0a0f1a; border:none; border-radius:8px; padding:9px 16px; font-family:'Noto Sans Myanmar',sans-serif; font-size:0.82rem; font-weight:700; cursor:pointer;">တပ်ဆင်မည်</button>
-  <button onclick="dismissInstall()" style="background:transparent; color:#6b7fa3; border:none; font-size:1.2rem; cursor:pointer; padding:4px;">✕</button>
+<div id="installBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#141e2e,#0f1623);border-top:1px solid #00d4aa;padding:14px 16px;align-items:center;gap:12px;z-index:9999;max-width:480px;margin:0 auto;">
+  <div style="font-size:1.5rem">🧊</div>
+  <div style="flex:1"><div style="font-family:'Noto Sans Myanmar',sans-serif;font-size:0.85rem;font-weight:700;color:#e8f0fe;">Homescreen ထည့်ရန်</div><div style="font-size:0.7rem;color:#5a6f94;margin-top:2px;">App အဖြစ် တိုက်ရိုက်ဖွင့်နိုင်မည်</div></div>
+  <button onclick="installApp()" style="background:#00d4aa;color:#080d18;border:none;border-radius:8px;padding:9px 16px;font-family:'Noto Sans Myanmar',sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;">တပ်ဆင်</button>
+  <button onclick="dismissInstall()" style="background:transparent;color:#5a6f94;border:none;font-size:1.2rem;cursor:pointer;padding:4px;">✕</button>
 </div>
 
 <script>
-// ==================== DATA ====================
-let items = JSON.parse(localStorage.getItem('items') || '[]');
-let sales = JSON.parse(localStorage.getItem('sales') || '[]');
-let voiceParsed = null;
-let recognition = null;
-let isListening = false;
+// ── DATA ──
+const DEFAULT_ITEMS = [
+  {id:1,name:'ဒိန်ချဉ်',cost:13.50,price:15,qty:9,alert:3},
+  {id:2,name:'M-150',cost:10.40,price:12,qty:16,alert:4},
+  {id:3,name:'Coffee',cost:13.33,price:17,qty:29,alert:5},
+  {id:4,name:'နို့',cost:9.61,price:12,qty:11,alert:3},
+  {id:5,name:'အုန်းရည်',cost:17.33,price:24,qty:26,alert:5},
+  {id:6,name:'Sting',cost:10.17,price:13,qty:5,alert:2},
+  {id:7,name:'Orange',cost:12,price:15,qty:4,alert:2},
+  {id:8,name:'ပေါင်မုန့်',cost:3.03,price:5,qty:15,alert:5},
+  {id:9,name:'Sponsor',cost:10.13,price:12,qty:11,alert:3},
+  {id:10,name:'Oshi',cost:8.13,price:10,qty:24,alert:5},
+];
 
-// ==================== INIT ====================
-function init() {
-  updateDate();
-  renderAll();
+let items   = JSON.parse(localStorage.getItem('items_v2')||'null');
+let sales   = JSON.parse(localStorage.getItem('sales_v2')||'[]');
+let persons = JSON.parse(localStorage.getItem('persons_v2')||'[]');
+let credits = JSON.parse(localStorage.getItem('credits_v2')||'[]');
+
+if(!items){ items=DEFAULT_ITEMS.map(i=>({...i})); localStorage.setItem('items_v2',JSON.stringify(items)); }
+
+let voiceParsed=null,recognition=null,isListening=false;
+let activeCreditPersonId=null,pendingSellData=null;
+
+// ── INIT ──
+function init(){ updateHeader(); renderAll(); setInterval(updateHeader,60000); }
+
+function updateHeader(){
+  const rev=sales.reduce((a,s)=>a+s.total,0);
+  const cred=credits.reduce((a,c)=>a+c.total,0);
+  document.getElementById('hRevenue').textContent='฿'+rev.toFixed(0);
+  document.getElementById('hCredit').textContent='💜 ฿'+cred.toFixed(0);
+  const badge=document.getElementById('creditBadge');
+  const n=new Set(credits.map(c=>c.personId)).size;
+  badge.textContent=n; badge.classList.toggle('show',n>0);
 }
 
-function updateDate() {
-  const now = new Date();
-  const days = ['တနင်္ဂနွေ','တနင်္လာ','အင်္ဂါ','ဗုဒ္ဓဟူး','ကြာသပတေး','သောကြာ','စနေ'];
-  document.getElementById('headerDate').textContent =
-    days[now.getDay()] + ' ' + now.getDate() + '/' + (now.getMonth()+1);
+function save(){
+  localStorage.setItem('items_v2',JSON.stringify(items));
+  localStorage.setItem('sales_v2',JSON.stringify(sales));
+  localStorage.setItem('persons_v2',JSON.stringify(persons));
+  localStorage.setItem('credits_v2',JSON.stringify(credits));
 }
 
-function save() {
-  localStorage.setItem('items', JSON.stringify(items));
-  localStorage.setItem('sales', JSON.stringify(sales));
+// ── ITEMS ──
+function addItem(){
+  const name=document.getElementById('newItemName').value.trim();
+  const cost=parseFloat(document.getElementById('newItemCost').value)||0;
+  const price=parseFloat(document.getElementById('newItemPrice').value)||0;
+  const qty=parseInt(document.getElementById('newItemQty').value)||0;
+  const alert=parseInt(document.getElementById('newItemAlert').value)||5;
+  if(!name){notify('အမည်ထည့်ပါ','danger');return;}
+  if(items.find(i=>i.name.toLowerCase()===name.toLowerCase())){notify('ပစ္စည်းရှိပြီးသား','danger');return;}
+  items.push({id:Date.now(),name,cost,price,qty,alert});
+  save();renderAll();
+  ['newItemName','newItemCost','newItemPrice','newItemQty','newItemAlert'].forEach(id=>document.getElementById(id).value='');
+  notify(name+' ထည့်ပြီး ✓');
 }
 
-// ==================== ITEMS ====================
-function addItem() {
-  const name = document.getElementById('newItemName').value.trim();
-  const cost = parseFloat(document.getElementById('newItemCost').value) || 0;
-  const price = parseFloat(document.getElementById('newItemPrice').value) || 0;
-  const qty = parseInt(document.getElementById('newItemQty').value) || 0;
-  const alert = parseInt(document.getElementById('newItemAlert').value) || 5;
-
-  if (!name) { notify('အမည်ထည့်ပါ'); return; }
-  if (items.find(i => i.name.toLowerCase() === name.toLowerCase())) {
-    notify('ထိုပစ္စည်းရှိပြီးသား'); return;
-  }
-
-  items.push({ id: Date.now(), name, cost, price, qty, alert });
-  save();
-  renderAll();
-  // clear
-  document.getElementById('newItemName').value = '';
-  document.getElementById('newItemCost').value = '';
-  document.getElementById('newItemPrice').value = '';
-  document.getElementById('newItemQty').value = '';
-  notify(name + ' ထည့်ပြီး ✓');
+function deleteItem(id){
+  if(!confirm('ဖျက်မှာသေချာလား?'))return;
+  items=items.filter(i=>i.id!==id); save();renderAll();
 }
 
-function deleteItem(id) {
-  if (!confirm('ဖျက်မှာသေချာလား?')) return;
-  items = items.filter(i => i.id !== id);
-  save(); renderAll();
+function restock(){
+  const sel=document.getElementById('restockItem');
+  const qty=parseInt(document.getElementById('restockQty').value)||0;
+  if(!sel.value||qty<=0){notify('ပမာဏထည့်ပါ','danger');return;}
+  const item=items.find(i=>i.id==sel.value);if(!item)return;
+  item.qty+=qty; save();renderAll();
+  document.getElementById('restockQty').value='';
+  notify(item.name+' +'+qty+' ဖြည့်ပြီး ✓');
 }
 
-function restock() {
-  const sel = document.getElementById('restockItem');
-  const qty = parseInt(document.getElementById('restockQty').value) || 0;
-  if (!sel.value || qty <= 0) { notify('ပမာဏထည့်ပါ'); return; }
-  const item = items.find(i => i.id == sel.value);
-  if (!item) return;
-  item.qty += qty;
-  save(); renderAll();
-  document.getElementById('restockQty').value = '';
-  notify(item.name + ' ' + qty + ' ခု ဖြည့်ပြီး ✓');
+// ── SELL ──
+function sellItem(){
+  const sel=document.getElementById('sellItem');
+  const qty=parseInt(document.getElementById('sellQty').value)||1;
+  const cp=parseFloat(document.getElementById('sellPrice').value);
+  if(!sel.value){notify('ပစ္စည်းရွေးပါ','danger');return;}
+  const item=items.find(i=>i.id==sel.value);if(!item)return;
+  doSell(item,qty,cp||item.price);
 }
 
-// ==================== SELL ====================
-function sellItem() {
-  const sel = document.getElementById('sellItem');
-  const qty = parseInt(document.getElementById('sellQty').value) || 1;
-  const customPrice = parseFloat(document.getElementById('sellPrice').value);
-  if (!sel.value) { notify('ပစ္စည်းရွေးပါ'); return; }
-  const item = items.find(i => i.id == sel.value);
-  if (!item) return;
-  doSell(item, qty, customPrice || item.price);
+function quickSell(id){
+  const item=items.find(i=>i.id===id);if(!item)return;
+  doSell(item,1,item.price);
 }
 
-function quickSell(id) {
-  const item = items.find(i => i.id === id);
-  if (!item) return;
-  doSell(item, 1, item.price);
+function doSell(item,qty,price){
+  if(item.qty<qty){notify('Stock မလုံလောက်ပါ ('+item.qty+' ခုကျန်)','danger');return null;}
+  item.qty-=qty;
+  const now=new Date();
+  const t=now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
+  const rec={id:Date.now(),itemId:item.id,itemName:item.name,qty,price,cost:item.cost,
+    total:parseFloat((qty*price).toFixed(2)),profit:parseFloat((qty*(price-item.cost)).toFixed(2)),time:t};
+  sales.push(rec); save();renderAll();
+  notify(item.name+' ×'+qty+' → ฿'+rec.total.toFixed(2)+' ✓');
+  if(item.qty<=item.alert) setTimeout(()=>notify('⚠️ '+item.name+' '+item.qty+' ခုသာကျန်ပြီ!','danger'),1600);
+  return rec;
 }
 
-function doSell(item, qty, price) {
-  if (item.qty < qty) { notify('Stock မလုံလောက်ပါ (' + item.qty + ' ခုသာကျန်သည်)'); return; }
-  item.qty -= qty;
-  const now = new Date();
-  const timeStr = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
-  sales.push({
-    id: Date.now(),
-    itemId: item.id,
-    itemName: item.name,
-    qty,
-    price,
-    cost: item.cost,
-    total: qty * price,
-    profit: qty * (price - item.cost),
-    time: timeStr
-  });
-  save(); renderAll();
-  notify(item.name + ' × ' + qty + ' → ' + (qty * price) + ' ဘတ် ✓');
-
-  if (item.qty <= item.alert) {
-    setTimeout(() => notify('⚠️ ' + item.name + ' ' + item.qty + ' ခုသာကျန်ပြီ!'), 1500);
-  }
+function deleteSale(id){
+  const s=sales.find(x=>x.id===id);if(!s)return;
+  const item=items.find(i=>i.id===s.itemId);if(item)item.qty+=s.qty;
+  sales=sales.filter(x=>x.id!==id); save();renderAll(); notify('ဖျက်ပြီး ✓');
 }
 
-// ==================== VOICE ====================
-function toggleVoice() {
-  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-    notify('ဤ browser သည် voice ကို မထောက်ပံ့ပါ'); return;
-  }
+// ── CREDIT ──
+function addPerson(){
+  const name=document.getElementById('newPersonName').value.trim();
+  if(!name){notify('နာမည်ထည့်ပါ','danger');return;}
+  if(persons.find(p=>p.name===name)){notify('နာမည်ရှိပြီးသား','danger');return;}
+  persons.push({id:Date.now(),name}); save();renderAll();
+  document.getElementById('newPersonName').value='';
+  notify(name+' ထည့်ပြီး ✓');
+}
 
-  if (isListening) {
-    stopVoice(); return;
-  }
+function openCreditSell(){
+  const sel=document.getElementById('sellItem');
+  const qty=parseInt(document.getElementById('sellQty').value)||1;
+  const cp=parseFloat(document.getElementById('sellPrice').value);
+  if(!sel.value){notify('ပစ္စည်းရွေးပါ','danger');return;}
+  const item=items.find(i=>i.id==sel.value);if(!item)return;
+  const price=cp||item.price;
+  pendingSellData={item,qty,price};
+  if(!persons.length){notify('အကြွေး Tab မှာ လူနာမည် အရင်ထည့်ပါ','danger');return;}
+  document.getElementById('creditPersonSelect').innerHTML=persons.map(p=>`<option value="${p.id}">${p.name}</option>`).join('');
+  document.getElementById('creditSellPreview').innerHTML=`<b>${item.name}</b> × ${qty} = <span style="color:var(--credit);font-family:'IBM Plex Mono',monospace;">฿${(qty*price).toFixed(2)}</span>`;
+  openModal('creditSellModal');
+}
 
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  recognition = new SR();
-  recognition.lang = 'my-MM';
-  recognition.interimResults = true;
-  recognition.continuous = false;
+function openVoiceCreditModal(){
+  if(!voiceParsed?.item)return;
+  pendingSellData={item:voiceParsed.item,qty:voiceParsed.qty,price:voiceParsed.price||voiceParsed.item.price};
+  if(!persons.length){notify('အကြွေး Tab မှာ လူနာမည် အရင်ထည့်ပါ','danger');return;}
+  document.getElementById('creditPersonSelect').innerHTML=persons.map(p=>`<option value="${p.id}">${p.name}</option>`).join('');
+  const d=pendingSellData;
+  document.getElementById('creditSellPreview').innerHTML=`<b>${d.item.name}</b> × ${d.qty} = <span style="color:var(--credit);font-family:'IBM Plex Mono',monospace;">฿${(d.qty*d.price).toFixed(2)}</span>`;
+  clearVoice(); openModal('creditSellModal');
+}
 
-  recognition.onstart = () => {
-    isListening = true;
+function confirmCreditSell(){
+  if(!pendingSellData)return;
+  const personId=parseInt(document.getElementById('creditPersonSelect').value);
+  const person=persons.find(p=>p.id===personId);if(!person)return;
+  const{item,qty,price}=pendingSellData;
+  if(item.qty<qty){notify('Stock မလုံလောက်ပါ','danger');return;}
+  item.qty-=qty;
+  const now=new Date();
+  const t=now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
+  credits.push({id:Date.now(),personId,personName:person.name,itemName:item.name,qty,price,
+    total:parseFloat((qty*price).toFixed(2)),time:t,date:now.toLocaleDateString('en-GB')});
+  save();renderAll(); closeModal('creditSellModal'); pendingSellData=null;
+  notify(person.name+' — '+item.name+' ×'+qty+' အကြွေးမှတ်ပြီး ✓');
+}
+
+function openPersonDetail(personId){
+  activeCreditPersonId=personId;
+  const person=persons.find(p=>p.id===personId);if(!person)return;
+  const pc=credits.filter(c=>c.personId===personId);
+  const total=pc.reduce((a,c)=>a+c.total,0);
+  document.getElementById('creditDetailName').textContent='👤 '+person.name;
+  document.getElementById('creditDetailTotal').textContent='฿'+total.toFixed(2);
+  const el=document.getElementById('creditDetailItems');
+  el.innerHTML=pc.length?[...pc].reverse().map(c=>
+    `<div class="credit-item-row">
+      <div><div class="ci-detail">${c.itemName} ×${c.qty}</div><div class="ci-time">${c.date} ${c.time}</div></div>
+      <div class="ci-amount">฿${c.total.toFixed(2)}</div>
+      <button onclick="deleteCreditItem(${c.id})" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;padding:2px 4px;">✕</button>
+    </div>`).join(''):'<div class="empty-state">အကြွေးမရှိပါ</div>';
+  openModal('creditDetailModal');
+}
+
+function deleteCreditItem(id){
+  if(!confirm('ဤအကြွေးမှတ်တမ်း ဖျက်မည်လား?'))return;
+  const c=credits.find(x=>x.id===id);
+  if(c){const item=items.find(i=>i.name===c.itemName);if(item)item.qty+=c.qty;}
+  credits=credits.filter(x=>x.id!==id); save(); openPersonDetail(activeCreditPersonId); renderAll();
+}
+
+function settleCredit(){
+  if(!activeCreditPersonId)return;
+  const person=persons.find(p=>p.id===activeCreditPersonId);
+  const total=credits.filter(c=>c.personId===activeCreditPersonId).reduce((a,c)=>a+c.total,0);
+  if(!confirm(person.name+' ၏ ကြွေး ฿'+total.toFixed(2)+' ဆပ်ပြီးဟုမှတ်မည်လား?'))return;
+  credits=credits.filter(c=>c.personId!==activeCreditPersonId);
+  save();renderAll(); closeModal('creditDetailModal'); notify(person.name+' ကြွေးဆပ်ပြီး ✓');
+}
+
+function deletePerson(){
+  if(!activeCreditPersonId)return;
+  const person=persons.find(p=>p.id===activeCreditPersonId);
+  if(!confirm(person.name+' ကို ဖျက်မည်လား?'))return;
+  credits=credits.filter(c=>c.personId!==activeCreditPersonId);
+  persons=persons.filter(p=>p.id!==activeCreditPersonId);
+  save();renderAll(); closeModal('creditDetailModal'); notify(person.name+' ဖျက်ပြီး');
+}
+
+// ── VOICE ──
+function toggleVoice(){
+  if(!('webkitSpeechRecognition' in window)&&!('SpeechRecognition' in window)){notify('Browser မထောက်ပံ့ပါ','danger');return;}
+  if(isListening){stopVoice();return;}
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  recognition=new SR(); recognition.lang='my-MM'; recognition.interimResults=true; recognition.continuous=false;
+  recognition.onstart=()=>{
+    isListening=true;
     document.getElementById('voiceBtn').classList.add('listening');
-    document.getElementById('voiceBtn').textContent = '⏹️';
-    document.getElementById('voiceStatus').textContent = 'နားထောင်နေသည်...';
-    document.getElementById('voiceTranscript').textContent = '';
+    document.getElementById('voiceBtn').textContent='⏹️';
+    document.getElementById('voiceStatus').textContent='နားထောင်နေသည်...';
+    document.getElementById('voiceTranscript').textContent='';
     document.getElementById('voiceTranscript').classList.remove('has-text');
   };
-
-  recognition.onresult = (e) => {
-    let interim = '', final = '';
-    for (let i = 0; i < e.results.length; i++) {
-      if (e.results[i].isFinal) final += e.results[i][0].transcript;
-      else interim += e.results[i][0].transcript;
-    }
-    const text = (final || interim).trim();
-    const el = document.getElementById('voiceTranscript');
-    el.textContent = text;
-    el.classList.toggle('has-text', !!text);
-    if (final) parseVoice(final.trim());
+  recognition.onresult=(e)=>{
+    let interim='',final='';
+    for(let i=0;i<e.results.length;i++){if(e.results[i].isFinal)final+=e.results[i][0].transcript;else interim+=e.results[i][0].transcript;}
+    const text=(final||interim).trim();
+    const el=document.getElementById('voiceTranscript');
+    el.textContent=text; el.classList.toggle('has-text',!!text);
+    if(final)parseVoice(final.trim());
   };
-
-  recognition.onerror = (e) => {
-    stopVoice();
-    if (e.error === 'no-speech') notify('အသံမကြားရပါ');
-    else notify('အမှား: ' + e.error);
-  };
-
-  recognition.onend = () => stopVoice();
+  recognition.onerror=(e)=>{stopVoice();notify('အမှား: '+e.error,'danger');};
+  recognition.onend=()=>stopVoice();
   recognition.start();
 }
 
-function stopVoice() {
-  isListening = false;
-  if (recognition) { try { recognition.stop(); } catch(e){} }
+function stopVoice(){
+  isListening=false;
+  if(recognition){try{recognition.stop();}catch(e){}}
   document.getElementById('voiceBtn').classList.remove('listening');
-  document.getElementById('voiceBtn').textContent = '🎤';
-  document.getElementById('voiceStatus').textContent = 'နှိပ်ပါ';
+  document.getElementById('voiceBtn').textContent='🎤';
+  document.getElementById('voiceStatus').textContent='နှိပ်ပါ';
 }
 
-function parseVoice(text) {
-  // Extract qty: digits + မြန်မာနံပါတ်
-  const myanmarNums = {'၀':0,'၁':1,'၂':2,'၃':3,'၄':4,'၅':5,'၆':6,'၇':7,'၈':8,'၉':9};
-  let normalized = text;
-  for (const [k,v] of Object.entries(myanmarNums)) {
-    normalized = normalized.replaceAll(k, v);
+function parseVoice(text){
+  const mm={'၀':0,'၁':1,'၂':2,'၃':3,'၄':4,'၅':5,'၆':6,'၇':7,'၈':8,'၉':9};
+  let norm=text;
+  for(const[k,v]of Object.entries(mm))norm=norm.replaceAll(k,String(v));
+  const nums=[...norm.matchAll(/\d+\.?\d*/g)].map(m=>parseFloat(m[0]));
+  let dQty=1,dPrice=null;
+  if(nums.length===1){if(nums[0]<=10)dQty=nums[0];else dPrice=nums[0];}
+  else if(nums.length>=2){dQty=nums[0]<=20?nums[0]:1;dPrice=nums[nums.length-1];if(dPrice===dQty)dPrice=null;}
+  let match=null;
+  const lower=text.toLowerCase();
+  for(const item of items){
+    const words=item.name.toLowerCase().split(/[\s\/\-]/);
+    for(const w of words){if(w.length>=2&&lower.includes(w)){match=item;break;}}
+    if(match)break;
   }
-
-  // Find numbers
-  const nums = [...normalized.matchAll(/\d+\.?\d*/g)].map(m => parseFloat(m[0]));
-  let detectedQty = 1, detectedPrice = null;
-
-  // Heuristic: smaller number = qty, larger = price
-  if (nums.length === 1) {
-    if (nums[0] <= 10) detectedQty = nums[0];
-    else detectedPrice = nums[0];
-  } else if (nums.length >= 2) {
-    // Check for patterns like "x ဘူး y ဘတ်"
-    detectedQty = nums[0] <= 20 ? nums[0] : 1;
-    detectedPrice = nums[nums.length - 1];
-    if (detectedPrice === detectedQty) detectedPrice = null;
-  }
-
-  // Match item by name fragment
-  let matchedItem = null;
-  const lower = text.toLowerCase();
-  for (const item of items) {
-    const itemLower = item.name.toLowerCase();
-    // Check each word of item name
-    const words = itemLower.split(/[\s\/\-]/);
-    for (const word of words) {
-      if (word.length >= 2 && lower.includes(word)) {
-        matchedItem = item;
-        break;
-      }
-    }
-    if (matchedItem) break;
-  }
-
-  // Common Myanmar drink keywords
-  const keywords = {
-    'coke': 'Coke', 'coca': 'Coke', 'ကိုးကာ': 'Coke',
-    'pepsi': 'Pepsi', 'ပယ်ဆီ': 'Pepsi',
-    'sprite': 'Sprite', 'orange': 'Orange',
-    'water': 'Water', 'ရေ': 'Water',
-    'green tea': 'Green Tea', 'သဘာဝ': 'Green Tea',
-    'red bull': 'Red Bull', 'နွားနီ': 'Red Bull',
-    '100': '100 Plus', 'plus': '100 Plus'
-  };
-
-  if (!matchedItem) {
-    for (const [kw, label] of Object.entries(keywords)) {
-      if (lower.includes(kw)) {
-        matchedItem = items.find(i => i.name.toLowerCase().includes(kw) || i.name.toLowerCase().includes(label.toLowerCase()));
-        break;
-      }
-    }
-  }
-
-  voiceParsed = {
-    item: matchedItem,
-    qty: detectedQty || 1,
-    price: detectedPrice
-  };
-
-  const preview = document.getElementById('parsedPreview');
-  preview.classList.add('show');
-  document.getElementById('pvItem').textContent = matchedItem ? matchedItem.name : '❓ မရှာမတွေ့';
-  document.getElementById('pvQty').textContent = detectedQty || 1;
-  document.getElementById('pvPrice').textContent = detectedPrice ? detectedPrice + ' ဘတ်' : (matchedItem ? matchedItem.price + ' ဘတ် (default)' : '-');
-  document.getElementById('confirmVoiceBtn').style.display = matchedItem ? 'block' : 'none';
+  voiceParsed={item:match,qty:dQty||1,price:dPrice};
+  document.getElementById('parsedPreview').classList.add('show');
+  document.getElementById('pvItem').textContent=match?match.name:'❓ မတွေ့';
+  document.getElementById('pvQty').textContent=dQty||1;
+  document.getElementById('pvPrice').textContent=dPrice?'฿'+dPrice:(match?'฿'+match.price+' (default)':'-');
+  document.getElementById('confirmVoiceBtn').style.display=match?'block':'none';
+  document.getElementById('confirmVoiceCreditBtn').style.display=match?'block':'none';
 }
 
-function confirmVoiceSale() {
-  if (!voiceParsed || !voiceParsed.item) return;
-  doSell(voiceParsed.item, voiceParsed.qty, voiceParsed.price || voiceParsed.item.price);
-  clearVoice();
-  switchTab('sell');
+function confirmVoiceSale(){
+  if(!voiceParsed?.item)return;
+  doSell(voiceParsed.item,voiceParsed.qty,voiceParsed.price||voiceParsed.item.price);
+  clearVoice(); switchTab('sell');
 }
 
-function clearVoice() {
-  voiceParsed = null;
-  document.getElementById('voiceTranscript').textContent = 'ဘာများပြောသနည်း...';
+function clearVoice(){
+  voiceParsed=null;
+  document.getElementById('voiceTranscript').textContent='ဘာများပြောသနည်း...';
   document.getElementById('voiceTranscript').classList.remove('has-text');
   document.getElementById('parsedPreview').classList.remove('show');
-  document.getElementById('confirmVoiceBtn').style.display = 'none';
+  document.getElementById('confirmVoiceBtn').style.display='none';
+  document.getElementById('confirmVoiceCreditBtn').style.display='none';
 }
 
-// ==================== RENDER ====================
-function renderAll() {
-  renderItemList();
-  renderSelects();
-  renderQuickSell();
-  renderSalesLog();
-  renderSummary();
-}
+// ── RENDER ──
+function renderAll(){renderItemList();renderSelects();renderQuickSell();renderSalesLog();renderCreditList();renderSummary();updateHeader();}
 
-function renderItemList() {
-  const el = document.getElementById('itemList');
-  if (!items.length) { el.innerHTML = '<div class="empty-state">ပစ္စည်းများ မထည့်ရသေးပါ</div>'; return; }
-  el.innerHTML = items.map(item => {
-    const stockClass = item.qty <= 0 ? 'stock-low' : item.qty <= item.alert ? 'stock-low' : item.qty <= item.alert * 2 ? 'stock-mid' : '';
-    return `<div class="item-row">
-      <div class="item-name">${item.name}</div>
-      <div class="item-price">${item.price} ဘတ်</div>
-      <div class="item-stock ${stockClass}">${item.qty} ခု</div>
+function renderItemList(){
+  const el=document.getElementById('itemList');
+  if(!items.length){el.innerHTML='<div class="empty-state">ပစ္စည်းများ မထည့်ရသေးပါ</div>';return;}
+  el.innerHTML=items.map(item=>{
+    const sc=item.qty<=0?'stock-low':item.qty<=item.alert?'stock-low':item.qty<=item.alert*2?'stock-mid':'';
+    const margin=item.price>0?((item.price-item.cost)/item.price*100).toFixed(0):0;
+    return`<div class="item-row">
+      <div class="item-name">${item.name}<br><small style="color:var(--muted);font-size:0.63rem;font-family:'IBM Plex Mono',monospace;">฿${item.cost} → ฿${item.price} <span style="color:var(--success)">${margin}%</span></small></div>
+      <div class="item-stock ${sc}">${item.qty} ခု</div>
       <button class="btn btn-danger" onclick="deleteItem(${item.id})">🗑</button>
-    </div>`;
-  }).join('');
+    </div>`;}).join('');
 }
 
-function renderSelects() {
-  const opts = items.map(i => `<option value="${i.id}">${i.name} (${i.qty})</option>`).join('');
-  const emptyOpt = '<option value="">-- ရွေးပါ --</option>';
-  document.getElementById('restockItem').innerHTML = emptyOpt + opts;
-  document.getElementById('sellItem').innerHTML = emptyOpt + opts;
+function renderSelects(){
+  const opts=items.map(i=>`<option value="${i.id}">${i.name} (${i.qty})</option>`).join('');
+  const e='<option value="">-- ရွေးပါ --</option>';
+  document.getElementById('restockItem').innerHTML=e+opts;
+  document.getElementById('sellItem').innerHTML=e+opts;
 }
 
-function renderQuickSell() {
-  const el = document.getElementById('quickSellGrid');
-  if (!items.length) { el.innerHTML = '<div class="empty-state" style="grid-column:span 2">ပစ္စည်းများ မထည့်ရသေးပါ</div>'; return; }
-  el.innerHTML = items.map(item => `
-    <button class="quick-btn" onclick="quickSell(${item.id})" ${item.qty <= 0 ? 'disabled style="opacity:0.4"' : ''}>
+function renderQuickSell(){
+  const el=document.getElementById('quickSellGrid');
+  if(!items.length){el.innerHTML='<div class="empty-state" style="grid-column:span 2">ပစ္စည်းမထည့်ရသေးပါ</div>';return;}
+  el.innerHTML=items.map(item=>`
+    <button class="quick-btn" onclick="quickSell(${item.id})" ${item.qty<=0?'disabled':''}>
       <span class="q-name">${item.name}</span>
-      <span class="q-price">${item.price} ဘတ်</span>
+      <span class="q-price">฿${item.price}</span>
       <span class="q-stock">ကျန် ${item.qty} ခု</span>
     </button>`).join('');
 }
 
-function renderSalesLog() {
-  const el = document.getElementById('salesLog');
-  if (!sales.length) { el.innerHTML = '<div class="empty-state">မရောင်းရသေးပါ</div>'; return; }
-  el.innerHTML = [...sales].reverse().slice(0, 30).map(s => `
-    <div class="sale-row">
+function renderSalesLog(){
+  const el=document.getElementById('salesLog');
+  if(!sales.length){el.innerHTML='<div class="empty-state">မရောင်းရသေးပါ</div>';return;}
+  el.innerHTML=[...sales].reverse().slice(0,40).map(s=>
+    `<div class="sale-row">
       <div class="sale-time">${s.time}</div>
-      <div class="sale-detail">${s.itemName} × ${s.qty}</div>
-      <div class="sale-total">+${s.total}</div>
+      <div class="sale-detail">${s.itemName} ×${s.qty}</div>
+      <div class="sale-total">฿${s.total.toFixed(2)}</div>
+      <button class="sale-del" onclick="deleteSale(${s.id})">✕</button>
     </div>`).join('');
 }
 
-function renderSummary() {
-  const revenue = sales.reduce((a,s) => a + s.total, 0);
-  const profit = sales.reduce((a,s) => a + s.profit, 0);
-  const units = sales.reduce((a,s) => a + s.qty, 0);
-  document.getElementById('statRevenue').textContent = revenue.toLocaleString();
-  document.getElementById('statProfit').textContent = profit.toLocaleString();
-  document.getElementById('statTxCount').textContent = sales.length;
-  document.getElementById('statUnits').textContent = units;
+function renderCreditList(){
+  const el=document.getElementById('creditPersonList');
+  const total=credits.reduce((a,c)=>a+c.total,0);
+  document.getElementById('totalCreditDisplay').textContent='฿'+total.toFixed(2);
+  if(!persons.length){el.innerHTML='<div class="empty-state">နာမည်များ မထည့်ရသေးပါ</div>';return;}
+  el.innerHTML=persons.map(p=>{
+    const pc=credits.filter(c=>c.personId===p.id);
+    const t=pc.reduce((a,c)=>a+c.total,0);
+    return`<div class="credit-person-row" onclick="openPersonDetail(${p.id})">
+      <div style="flex:1"><div class="cp-name">👤 ${p.name}</div><div class="cp-count">${pc.length} ကြိမ်</div></div>
+      <div class="cp-amount">${t>0?'฿'+t.toFixed(2):'<span style="color:var(--success);font-size:0.78rem;">✓ ကြွေးမရှိ</span>'}</div>
+      <span style="color:var(--muted)">›</span>
+    </div>`;}).join('');
+}
 
-  // Stock summary
-  const ss = document.getElementById('stockSummary');
-  if (!items.length) { ss.innerHTML = '<div class="empty-state">ပစ္စည်းများ မထည့်ရသေးပါ</div>'; }
-  else {
-    ss.innerHTML = items.map(item => {
-      const isLow = item.qty <= item.alert;
-      return `<div class="item-row">
-        <div class="item-name">${item.name} <span class="chip ${isLow ? 'chip-low' : 'chip-ok'}">${isLow ? 'နည်းသည်' : 'ရှိသည်'}</span></div>
-        <div class="item-stock ${isLow ? 'stock-low' : ''}">${item.qty} ခု</div>
-      </div>`;
-    }).join('');
-  }
-
-  // Item sales summary
-  const is = document.getElementById('itemSummary');
-  if (!sales.length) { is.innerHTML = '<div class="empty-state">မရောင်းရသေးပါ</div>'; return; }
-  const itemMap = {};
-  for (const s of sales) {
-    if (!itemMap[s.itemName]) itemMap[s.itemName] = { qty: 0, total: 0, profit: 0 };
-    itemMap[s.itemName].qty += s.qty;
-    itemMap[s.itemName].total += s.total;
-    itemMap[s.itemName].profit += s.profit;
-  }
-  is.innerHTML = Object.entries(itemMap).sort((a,b) => b[1].total - a[1].total).map(([name, d]) =>
+function renderSummary(){
+  const rev=sales.reduce((a,s)=>a+s.total,0);
+  const prof=sales.reduce((a,s)=>a+s.profit,0);
+  const cred=credits.reduce((a,c)=>a+c.total,0);
+  document.getElementById('statRevenue').textContent='฿'+rev.toFixed(2);
+  document.getElementById('statProfit').textContent='฿'+prof.toFixed(2);
+  document.getElementById('statTxCount').textContent=sales.length;
+  document.getElementById('statCredit').textContent='฿'+cred.toFixed(2);
+  const ss=document.getElementById('stockSummary');
+  ss.innerHTML=items.length?items.map(item=>{
+    const isLow=item.qty<=item.alert;
+    return`<div class="item-row">
+      <div class="item-name">${item.name}<span class="chip ${isLow?'chip-low':'chip-ok'}">${isLow?'နည်းသည်':'ရှိသည်'}</span></div>
+      <div class="item-stock ${isLow?'stock-low':''}">${item.qty} ခု</div>
+    </div>`;}).join(''):'<div class="empty-state">မရှိသေးပါ</div>';
+  const is=document.getElementById('itemSummary');
+  if(!sales.length){is.innerHTML='<div class="empty-state">မရောင်းရသေးပါ</div>';return;}
+  const map={};
+  for(const s of sales){if(!map[s.itemName])map[s.itemName]={qty:0,total:0,profit:0};map[s.itemName].qty+=s.qty;map[s.itemName].total+=s.total;map[s.itemName].profit+=s.profit;}
+  is.innerHTML=Object.entries(map).sort((a,b)=>b[1].total-a[1].total).map(([name,d])=>
     `<div class="item-row">
       <div class="item-name">${name}</div>
-      <div style="font-size:0.75rem; color:var(--muted)">${d.qty} ခု</div>
-      <div class="item-stock">${d.total} ဘတ်</div>
+      <div style="font-size:0.7rem;color:var(--muted)">${d.qty} ခု</div>
+      <div class="item-stock">฿${d.total.toFixed(2)}</div>
+      <div style="font-size:0.7rem;color:var(--success)">+฿${d.profit.toFixed(2)}</div>
     </div>`).join('');
 }
 
-// ==================== TABS ====================
-function switchTab(tab) {
-  document.querySelectorAll('.tab').forEach((t,i) => {
-    const panels = ['stock','sell','voice','summary'];
-    t.classList.toggle('active', panels[i] === tab);
-  });
-  document.querySelectorAll('.panel').forEach(p => {
-    p.classList.toggle('active', p.id === 'panel-' + tab);
-  });
-  if (tab === 'summary') renderSummary();
+// ── EXPORT ──
+function exportSummary(){
+  const now=new Date();
+  const rev=sales.reduce((a,s)=>a+s.total,0);
+  const prof=sales.reduce((a,s)=>a+s.profit,0);
+  const cred=credits.reduce((a,c)=>a+c.total,0);
+  const map={};
+  for(const s of sales){if(!map[s.itemName])map[s.itemName]={qty:0,total:0};map[s.itemName].qty+=s.qty;map[s.itemName].total+=s.total;}
+  let txt=`🧊 အအေးစာရင်း — ${now.toLocaleDateString('en-GB')}\n━━━━━━━━━━━━━━\n`;
+  txt+=`💰 ရောင်းရငွေ: ฿${rev.toFixed(2)}\n📈 အမြတ်: ฿${prof.toFixed(2)}\n💜 အကြွေးကျန်: ฿${cred.toFixed(2)}\n━━━━━━━━━━━━━━\n`;
+  for(const[name,d]of Object.entries(map).sort((a,b)=>b[1].total-a[1].total)) txt+=`${name}: ${d.qty}ခု → ฿${d.total.toFixed(2)}\n`;
+  txt+=`━━━━━━━━━━━━━━\n📦 Stock:\n`;
+  for(const item of items) txt+=`${item.name}: ${item.qty}ခု\n`;
+  if(credits.length){
+    txt+=`━━━━━━━━━━━━━━\n💜 အကြွေးစာရင်း:\n`;
+    const pm={};
+    for(const c of credits){if(!pm[c.personName])pm[c.personName]=0;pm[c.personName]+=c.total;}
+    for(const[name,t]of Object.entries(pm)) txt+=`${name}: ฿${t.toFixed(2)}\n`;
+  }
+  navigator.clipboard?.writeText(txt).then(()=>notify('Clipboard Copy ပြီး ✓')).catch(()=>notify('Copy မရပါ','danger'));
 }
 
-// ==================== UTILS ====================
-function resetDaySales() {
-  if (!confirm('ယနေ့ ရောင်းချမှတ်တမ်းများ ဖျက်မည်လား?\n(Stock လက်ကျန်မပြောင်းဘဲ ရောင်းချမှတ်တမ်းသာ သန့်ရှင်းမည်)')) return;
-  sales = [];
-  save(); renderAll();
-  notify('မှတ်တမ်းများ သန့်ရှင်းပြီး ✓');
+// ── TABS & MODALS ──
+function switchTab(tab){
+  const tabs=['stock','sell','voice','credit','summary'];
+  document.querySelectorAll('.nav-tab').forEach((t,i)=>t.classList.toggle('active',tabs[i]===tab));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+tab));
+  if(tab==='summary')renderSummary();
 }
 
-function notify(msg) {
-  const el = document.getElementById('notification');
-  el.textContent = msg;
-  el.classList.add('show');
-  setTimeout(() => el.classList.remove('show'), 2500);
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.modal-overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');}));
+
+// ── UTILS ──
+function resetDaySales(){
+  if(!confirm('ယနေ့ ရောင်းချမှတ်တမ်းများ ဖျက်မည်လား?'))return;
+  sales=[];save();renderAll();notify('မှတ်တမ်း သန့်ရှင်းပြီး ✓');
 }
+
+function notify(msg,type=''){
+  const el=document.getElementById('notification');
+  el.textContent=msg;
+  el.className='notification show'+(type==='danger'?' danger':'');
+  clearTimeout(el._t);
+  el._t=setTimeout(()=>el.classList.remove('show'),2600);
+}
+
+// ── PWA ──
+if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById('installBanner').style.display='flex';});
+window.addEventListener('appinstalled',()=>{document.getElementById('installBanner').style.display='none';deferredPrompt=null;});
+function installApp(){if(!deferredPrompt)return;deferredPrompt.prompt();deferredPrompt.userChoice.then(()=>{deferredPrompt=null;dismissInstall();});}
+function dismissInstall(){document.getElementById('installBanner').style.display='none';}
 
 init();
-
-// ==================== PWA ====================
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
-  });
-}
-
-let deferredPrompt = null;
-window.addEventListener('beforeinstallprompt', e => {
-  e.preventDefault();
-  deferredPrompt = e;
-  document.getElementById('installBanner').style.display = 'flex';
-});
-
-window.addEventListener('appinstalled', () => {
-  document.getElementById('installBanner').style.display = 'none';
-  deferredPrompt = null;
-});
-
-function installApp() {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(() => {
-      deferredPrompt = null;
-      document.getElementById('installBanner').style.display = 'none';
-    });
-  }
-}
-
-function dismissInstall() {
-  document.getElementById('installBanner').style.display = 'none';
-}
 </script>
 
 </body>
